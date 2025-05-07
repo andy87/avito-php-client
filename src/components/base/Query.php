@@ -1,21 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\components\query;
+namespace andy87\avito\client\components\base;
 
 
-use andy87\avito\client\components\resources\Resources;
 
 /**
  * Class Request
  *
- * @package app\components\avito_api\base
+ * @package src\components\base
  */
-abstract class Query extends Resources
+abstract class Query
 {
-    public const METHOD_GET = 'GET';
-    public const METHOD_POST = 'POST';
-    public const METHOD_PUT = 'PUT';
-    public const METHOD_DELETE = 'DELETE';
+    public const GET = 'GET';
+    public const POST = 'POST';
+    public const PUT = 'PUT';
+    public const DELETE = 'DELETE';
 
     public const CONTENT_TYPE_JSON = 'application/json';
     public const CONTENT_TYPE_FORM_URLENCODED = 'application/x-www-form-urlencoded';
@@ -26,7 +25,7 @@ abstract class Query extends Resources
     protected string $endpoint;
 
     /** @var string */
-    protected string $method = self::METHOD_GET;
+    protected string $method = self::GET;
 
     /** @var string  */
     protected string $contentType = self::CONTENT_TYPE_JSON;
@@ -41,6 +40,7 @@ abstract class Query extends Resources
     protected ?array $curlInfo = null;
 
 
+
     /**
      * @return void
      */
@@ -53,6 +53,9 @@ abstract class Query extends Resources
             $this->data = [];
         }
     }
+
+
+    # ------ Endpoint ------
 
     /**
      * @return string
@@ -75,6 +78,8 @@ abstract class Query extends Resources
     }
 
 
+    # ----- Method ------
+
     /**
      * @return string
      */
@@ -95,6 +100,9 @@ abstract class Query extends Resources
         return $this;
     }
 
+
+    # ------ Content Type ------
+
     /**
      * @return string
      */
@@ -114,6 +122,9 @@ abstract class Query extends Resources
 
         return $this;
     }
+
+
+    # ------ Headers ------
 
     /**
      * @return array

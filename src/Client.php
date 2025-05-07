@@ -2,22 +2,42 @@
 
 namespace andy87\avito\client;
 
-
-use andy87\avito\client\components\query\Query;
-use andy87\avito\client\components\resources\applicationsWebhook\ApplicationsWebhook;
-use andy87\avito\client\components\resources\applicationsWebhook\ApplicationsWebhookResponse;
-use andy87\avito\client\components\resources\Params;
-use andy87\avito\client\components\resources\token\Token;
-use andy87\avito\client\components\resources\token\TokenResponse;
-use andy87\avito\client\components\SdkRoot;
+use andy87\avito\client\data\Token;
+use andy87\avito\client\components\GrandType;
+use andy87\avito\client\components\base\Root;
+use andy87\avito\client\components\base\Query;
+use andy87\avito\client\components\base\Params;
+use andy87\avito\client\data\ApplicationsWebhook;
+use andy87\avito\client\components\response\TokenResponse;
+use andy87\avito\client\components\response\ApplicationsWebhookResponse;
 
 /**
  * Class SdkAvito
  *
- * @package app\components\sdk\sdkAvito
+ * @package src
  */
-abstract class Client extends SdkRoot
+abstract class Client extends Root
 {
+    /**
+     * Получение access token
+     * Получения временного ключа для авторизации
+     *
+     * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken
+     *
+     * @param Token $token
+     *
+     * @return ?TokenResponse
+     */
+    public function getAccessToken( Token $token ): ?TokenResponse
+    {
+        $token->grant_type = GrandType::CLIENT_CREDENTIALS;
+
+        /** @var ?TokenResponse $response */
+        $response = $this->send( $token );
+
+        return $response;
+    }
+
     /**
      * Получение access token
      * Получения временного ключа для авторизации запроса от лица пользователя
@@ -30,7 +50,7 @@ abstract class Client extends SdkRoot
      */
     public function getAccessTokenAuthorizationCode( Token $token ): ?TokenResponse
     {
-        $token->prepareEndpoint();
+        $token->grant_type = GrandType::AUTHORIZATION_CODE;
 
         /** @var ?TokenResponse $response */
         $response = $this->send( $token );
@@ -38,6 +58,25 @@ abstract class Client extends SdkRoot
         return $response;
     }
 
+    /**
+     * Получение access token
+     * Получения временного ключа для авторизации запроса от лица пользователя
+     *
+     * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/refreshAccessTokenAuthorizationCode
+     *
+     * @param Token $token
+     *
+     * @return ?TokenResponse
+     */
+    public function refreshAccessTokenAuthorizationCode( Token $token ): ?TokenResponse
+    {
+        $token->grant_type = GrandType::AUTHORIZATION_CODE;
+
+        /** @var ?TokenResponse $response */
+        $response = $this->send( $token );
+
+        return $response;
+    }
     /**
      * Получение информации о подписках (webhook)
      * Получение информации по существующим подпискам на создание и обновление откликов
@@ -50,7 +89,7 @@ abstract class Client extends SdkRoot
      */
     public function applicationsWebhookGet( ApplicationsWebhook $webhook ): ?ApplicationsWebhookResponse
     {
-        $webhook = $this->prepareMethod( Query::METHOD_GET, $webhook );
+        $webhook = $this->prepareMethod( Query::GET, $webhook );
 
         /** @var ?ApplicationsWebhookResponse $response */
         $response = $this->send( $webhook );
@@ -73,7 +112,7 @@ abstract class Client extends SdkRoot
      */
     public function applicationsWebhookPut( ApplicationsWebhook $webhook ): ?ApplicationsWebhookResponse
     {
-        $webhook = $this->prepareMethod( Query::METHOD_PUT, $webhook );
+        $webhook = $this->prepareMethod( Query::PUT, $webhook );
 
         /** @var ?ApplicationsWebhookResponse $response */
         $response = $this->send( $webhook );
@@ -82,10 +121,10 @@ abstract class Client extends SdkRoot
     }
 
     /**
-     * Отключение уведомлений по откликам (webhook)
-     * Отписка от уведомлений о создании и обновлении откликов на вакансии
+     * Обновление access token
+     * Обновление временного ключа для авторизации запроса от лица пользователя
      *
-     * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookDelete
+     * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/refreshAccessTokenAuthorizationCode
      *
      * @param ApplicationsWebhook $webhook
      *
@@ -93,10 +132,29 @@ abstract class Client extends SdkRoot
      */
     public function applicationsWebhookDelete( ApplicationsWebhook $webhook ): ?ApplicationsWebhookResponse
     {
-        $webhook = $this->prepareMethod( Query::METHOD_DELETE, $webhook );
+        $webhook = $this->prepareMethod( Query::DELETE, $webhook );
 
         /** @var ?ApplicationsWebhookResponse $response */
         $response = $this->send( $webhook );
+
+        return $response;
+    }
+
+    /**
+     * Получение списка откликов
+     *
+     * Получение списка откликов по uuid, полученным по подписке на уведомления (webhook) и через метод получение идентификаторов откликов
+     *
+     * Максимальный лимит = 100
+     *
+     * @param ApplicationsGetByIds $applicationsGetByIds
+     *
+     * @return ?ApplicationsGetByIdsResponse
+     */
+    public function applicationsGetByIds( ApplicationsGetByIds $applicationsGetByIds )
+    {
+        /** @var ?ApplicationsGetByIdsResponse $response */
+        $response = $this->send( $applicationsGetByIds );
 
         return $response;
     }

@@ -5,7 +5,7 @@ namespace andy87\avito\client\yii2\redis;
 use Yii;
 use yii\redis\Connection;
 use yii\base\InvalidConfigException;
-use andy87\avito\client\components\resources\token\TokenResponse;
+use andy87\avito\client\components\response\TokenResponse;
 use andy87\avito\client\components\interfaces\CacheManagerInterface;
 
 /**

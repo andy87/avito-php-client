@@ -4,17 +4,16 @@ namespace andy87\avito\client\yii2;
 
 use Yii;
 use andy87\avito\client\Client;
-use andy87\avito\client\components\query\Request;
+use andy87\avito\client\components\base\Request;
 use andy87\avito\client\components\resources\token\Token;
 use andy87\avito\client\components\resources\token\TokenResponse;
-
 
 /**
  * Class AvitoYii2Api
  *
  * @package app\components\sdk\sdkAvito
  */
-class AvitoApi extends Client
+class AvitoClient extends Client
 {
     public Token $token;
 

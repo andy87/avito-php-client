@@ -2,12 +2,12 @@
 
 namespace andy87\avito\client\components\interfaces;
 
-use andy87\avito\client\components\resources\token\TokenResponse;
+use andy87\avito\client\components\response\TokenResponse;
 
 /**
  * Interface CacheManagerInterface
  *
- * @package app\components\sdk\sdkAvito\base\interfaces
+ * @package src\components\interfaces
  */
 interface CacheManagerInterface
 {

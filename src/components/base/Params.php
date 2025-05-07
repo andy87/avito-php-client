@@ -1,15 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\components\resources;
+namespace andy87\avito\client\components\base;
 
 use CurlHandle;
-use andy87\avito\client\components\query\Query;
-use andy87\avito\client\components\query\Response;
 
 /**
  * Class Params
  *
- * @package app\components\sdk\sdkAvito\base\resources
+ * @package src\components\base
  */
 abstract class Params extends Query
 {

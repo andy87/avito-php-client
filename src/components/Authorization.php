@@ -3,15 +3,12 @@
 namespace andy87\avito\client\components;
 
 /**
- * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode
+ * @documentation https://developers.avito.ru
  *
- * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken
+ * @package src\components
  */
 abstract class Authorization
 {
-    /** @var string  */
-    public const AUTHORIZATION_CODE = 'authorization_code';
-
-    /** @var string  */
-    public const CLIENT_CREDENTIALS = 'client_credentials';
+    /** @var string `Bearer ACCESS_TOKEN` для авторизации */
+    public const ACCESS_TOKEN = 'access_token';
 }

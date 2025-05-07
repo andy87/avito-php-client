@@ -1,18 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\components;
+namespace andy87\avito\client\components\base;
 
-use andy87\avito\client\components\query\Request;
-use andy87\avito\client\components\query\Response;
-use andy87\avito\client\components\resources\Params;
+use andy87\avito\client\components\Authorization;
 use andy87\avito\client\components\interfaces\CacheManagerInterface;
 
 /**
  * Class Sdk
  *
- * @package app\components\sdk\sdkAvito\base
+ * @package src\components\base
  */
-abstract class SdkRoot
+abstract class Root
 {
     /** @var string  */
     public string $requestClass = Request::class;
@@ -47,10 +45,7 @@ abstract class SdkRoot
     {
         $className = $this->requestClass;
 
-        /** @var Request $request */
-        $request = new $className( $params, $responseClass );
-
-        return $request;
+        return new $className( $params, $responseClass );
     }
 
     /**
@@ -74,7 +69,7 @@ abstract class SdkRoot
 
         $request->closeCurl();
 
-        if ( $response->isValid() ) return $response;
+        if ( $response->validate() ) return $response;
 
         $this->errorHandler( $request );
 
@@ -91,8 +86,8 @@ abstract class SdkRoot
     {
         switch ( $request->params->authorization )
         {
-            case Authorization::CLIENT_CREDENTIALS:
-            case Authorization::AUTHORIZATION_CODE:
+            case Authorization::ACCESS_TOKEN:
+
                 $tokenResponse = $this->accessCacheManager->getCacheAccess( $cacheKey );
 
                 $request->updateHeaders([
@@ -100,6 +95,8 @@ abstract class SdkRoot
                 ]);
                 break;
 
+            case Authorization::CLIENT_CREDENTIALS:
+            case Authorization::AUTHORIZATION_CODE:
             default:
                 break;
         }

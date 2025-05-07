@@ -5,7 +5,7 @@ namespace andy87\avito\client\components;
 /**
  * Class Endpoints
  *
- * @package app\components\sdk\sdkAvito
+ * @package src\components
  */
 abstract class Endpoints
 {
@@ -15,5 +15,6 @@ abstract class Endpoints
     /** @var string  */
     public const APPLICATIONS_WEBHOOK = '/job/v1/applications/webhook';
 
-
+    /** @var string  */
+    public const APPLICATIONS_GET_IDS = '/job/v1/applications/get_ids';
 }

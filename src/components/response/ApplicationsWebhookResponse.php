@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\components\resources\applicationsWebhook;
+namespace andy87\avito\client\components\response;
 
-use andy87\avito\client\components\query\Query;
-use andy87\avito\client\components\query\Response;
+use andy87\avito\client\components\base\Query;
+use andy87\avito\client\components\base\Response;
 
 /**
  * Включение уведомлений по откликам (webhook)
@@ -13,35 +13,44 @@ use andy87\avito\client\components\query\Response;
  * Важно: проверьте доступность url, при его недоступности из контура Авито webhook не будет создан/перезаписан.
  *
  * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookPut
+ *
+ * @package src\components\resources\applicationsWebhook
  */
-class ApplicationsWebhookResponse extends Response
+final class ApplicationsWebhookResponse extends Response
 {
     /**
-     * @var string
+     *
      *
      * @criteria GET|PUT
      *
      * @example "cb1e150b-c5bf-4c3e-acd1-20ec88bdb3a1"
+     *
+     * @var string
      */
     public string $secret;
 
     /**
-     * @var string
+     *
      *
      * @criteria GET|PUT
      *
      * @example "https://mysite.webhook/"
+     *
+     * @var string
      */
     public string $url;
 
     /**
-     * @var bool
+     *
      *
      * @criteria DELETE
      *
      * @example true
+     *
+     * @var bool
      */
     public bool $ok;
+
 
 
     /**
@@ -49,10 +58,10 @@ class ApplicationsWebhookResponse extends Response
      *
      * @return bool
      */
-    public function isValid( ?string $rules = null ): bool
+    public function validate(?string $rules = null ): bool
     {
         return match ($rules) {
-            Query::METHOD_DELETE => $this->ok === true,
+            Query::DELETE => $this->ok === true,
             default => !empty($this->secret) && !empty($this->url),
         };
     }
