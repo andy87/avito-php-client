@@ -2,11 +2,13 @@
 
 namespace andy87\avito\client\yii2;
 
+use andy87\avito\client\components\interfaces\CacheManagerInterface;
 use Yii;
 use andy87\avito\client\Client;
+use andy87\avito\client\data\Token;
+use andy87\avito\client\components\GrandType;
 use andy87\avito\client\components\base\Request;
-use andy87\avito\client\components\resources\token\Token;
-use andy87\avito\client\components\resources\token\TokenResponse;
+use andy87\avito\client\components\response\TokenResponse;
 
 /**
  * Class AvitoYii2Api
@@ -18,13 +20,41 @@ class AvitoClient extends Client
     public Token $token;
 
 
-
     /**
+     * @param string $grantType Тип авторизации
+     * @param bool $useCache Метка для использования кэша
+     *
      * @return ?TokenResponse
      */
-    public function authorization(): ?TokenResponse
+    public function authorization( string $grantType, bool $useCache = true ): ?TokenResponse
     {
-        return $this->getAccessTokenAuthorizationCode( $this->token );
+        $tokenResponse = match ($grantType)
+        {
+            GrandType::CLIENT_CREDENTIALS => $this->getAccessToken( $this->token ),
+            GrandType::AUTHORIZATION_CODE => $this->getAccessTokenAuthorizationCode( $this->token ),
+            GrandType::REFRESH_TOKEN => $this->refreshAccessTokenAuthorizationCode( $this->token ),
+        };
+
+        if ( $tokenResponse->validate() )
+        {
+            if ( $useCache && $this->accessCacheManager )
+            {
+                $key = $this->accessCacheManager->getCacheKey();
+
+                $this->accessCacheManager->setCacheAccess( $key, $tokenResponse );
+            }
+
+            return $tokenResponse;
+        }
+
+        \Yii::error([
+            'datetime' => date('Y-m-d H:i:s'),
+            '$grantType' => $grantType,
+            'token' => $this->token,
+            'request' => $tokenResponse
+        ]);
+
+        return null;
     }
 
     /**

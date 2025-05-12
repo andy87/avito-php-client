@@ -6,6 +6,7 @@ use andy87\avito\client\components\Endpoints;
 use andy87\avito\client\components\Authorization;
 use andy87\avito\client\components\data\ParamsEmployee;
 use andy87\avito\client\components\response\AppilicationsGetIdsResponse;
+use andy87\avito\client\components\response\ApplicationsGetByIdsResponse;
 
 /**
  * Получение идентификаторов откликов
@@ -21,9 +22,12 @@ use andy87\avito\client\components\response\AppilicationsGetIdsResponse;
  */
 final class ApplicationsGetByIds extends ParamsEmployee
 {
+
     public const RESPONSE_CLASS = ApplicationsGetByIdsResponse::class;
 
+
     public string $endpoint = Endpoints::APPLICATIONS_GET_IDS;
+
 
     public ?string $authorization = Authorization::ACCESS_TOKEN;
 

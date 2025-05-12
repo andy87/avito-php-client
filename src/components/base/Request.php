@@ -9,12 +9,12 @@ use CurlHandle;
  *
  * @package src\components\base
  */
-final class Request extends Query
+class Request extends Query
 {
     public Params $params;
 
 
-    protected CurlHandle $curl;
+    protected ?CurlHandle $curl = null;
 
 
     protected int $httpCode = 200;
@@ -58,11 +58,13 @@ final class Request extends Query
      */
     public function query(): void
     {
-        $this->content = curl_exec($this->curl);
+        $this->content = curl_exec( $this->curl );
 
-        $this->httpCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
+        $this->response = json_decode( $this->content, true );
 
-        $this->errors = curl_error($this->curl);
+        $this->httpCode = curl_getinfo( $this->curl, CURLINFO_HTTP_CODE );
+
+        $this->errors = curl_error( $this->curl );
     }
 
     /**
@@ -129,6 +131,6 @@ final class Request extends Query
      */
     public function closeCurl(): void
     {
-        curl_close($this->curl);
+        if ($this->curl) curl_close($this->curl);
     }
 }

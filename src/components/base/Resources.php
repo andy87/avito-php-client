@@ -32,7 +32,7 @@ abstract class Resources
     {
         if ( count( $properties ) > 0 )
         {
-            foreach ($properties as $property => $data )
+            foreach ( $properties as $property => $data )
             {
                 if ( property_exists( $this, $property ) )
                 {
@@ -50,7 +50,7 @@ abstract class Resources
      *
      * @return mixed
      */
-    private function prepareValue(mixed $classConfig, mixed $data ): mixed
+    private function prepareValue( mixed $classConfig, mixed $data ): mixed
     {
         if ( $classConfig instanceof Resources )
         {

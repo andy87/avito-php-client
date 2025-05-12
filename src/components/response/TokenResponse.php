@@ -71,7 +71,7 @@ final class TokenResponse extends Response
             return false;
         }
 
-        if ( $this->expires_in < 0 ) {
+        if ( $this->expires_in <= 0 ) {
             return false;
         }
 

@@ -2,6 +2,9 @@
 
 namespace andy87\avito\client\components\base;
 
+use andy87\avito\client\components\response\dto\Error;
+use andy87\avito\client\components\response\dto\Result;
+
 /**
  * Class Response
  *
@@ -9,6 +12,13 @@ namespace andy87\avito\client\components\base;
  */
 abstract class Response extends Resources
 {
+    /** @var Result $result */
+    public Result $result;
+
+    /** @var Error $error */
+    public Error $error;
+
+
     /** @var array  */
     protected array $curlInfo = [];
 

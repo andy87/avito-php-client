@@ -58,7 +58,7 @@ final class ApplicationsWebhookResponse extends Response
      *
      * @return bool
      */
-    public function validate(?string $rules = null ): bool
+    public function validate( ?string $rules = null ): bool
     {
         return match ($rules) {
             Query::DELETE => $this->ok === true,

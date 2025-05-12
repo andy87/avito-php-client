@@ -2,21 +2,24 @@
 
 namespace andy87\avito\client;
 
+use andy87\avito\client\components\response\ApplicationsGetByIdsResponse;
+use andy87\avito\client\data\ApplicationsGetByIds;
 use andy87\avito\client\data\Token;
 use andy87\avito\client\components\GrandType;
-use andy87\avito\client\components\base\Root;
+use andy87\avito\client\components\base\Operator;
 use andy87\avito\client\components\base\Query;
 use andy87\avito\client\components\base\Params;
 use andy87\avito\client\data\ApplicationsWebhook;
 use andy87\avito\client\components\response\TokenResponse;
 use andy87\avito\client\components\response\ApplicationsWebhookResponse;
+use Exception;
 
 /**
  * Class SdkAvito
  *
  * @package src
  */
-abstract class Client extends Root
+abstract class Client extends Operator
 {
     /**
      * Получение access token
@@ -27,6 +30,8 @@ abstract class Client extends Root
      * @param Token $token
      *
      * @return ?TokenResponse
+     *
+     * @throws Exception
      */
     public function getAccessToken( Token $token ): ?TokenResponse
     {
@@ -47,6 +52,8 @@ abstract class Client extends Root
      * @param Token $token
      *
      * @return ?TokenResponse
+     *
+     * @throws Exception
      */
     public function getAccessTokenAuthorizationCode( Token $token ): ?TokenResponse
     {
@@ -67,10 +74,12 @@ abstract class Client extends Root
      * @param Token $token
      *
      * @return ?TokenResponse
+     *
+     * @throws Exception
      */
     public function refreshAccessTokenAuthorizationCode( Token $token ): ?TokenResponse
     {
-        $token->grant_type = GrandType::AUTHORIZATION_CODE;
+        $token->grant_type = GrandType::REFRESH_TOKEN;
 
         /** @var ?TokenResponse $response */
         $response = $this->send( $token );
@@ -86,6 +95,8 @@ abstract class Client extends Root
      * @param ApplicationsWebhook $webhook
      *
      * @return ?ApplicationsWebhookResponse
+     *
+     * @throws Exception
      */
     public function applicationsWebhookGet( ApplicationsWebhook $webhook ): ?ApplicationsWebhookResponse
     {
@@ -109,6 +120,8 @@ abstract class Client extends Root
      * @param ApplicationsWebhook $webhook
      *
      * @return ?ApplicationsWebhookResponse
+     *
+     * @throws Exception
      */
     public function applicationsWebhookPut( ApplicationsWebhook $webhook ): ?ApplicationsWebhookResponse
     {
@@ -124,11 +137,13 @@ abstract class Client extends Root
      * Обновление access token
      * Обновление временного ключа для авторизации запроса от лица пользователя
      *
-     * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/refreshAccessTokenAuthorizationCode
+     * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookDelete
      *
      * @param ApplicationsWebhook $webhook
      *
      * @return ?ApplicationsWebhookResponse
+     *
+     * @throws Exception
      */
     public function applicationsWebhookDelete( ApplicationsWebhook $webhook ): ?ApplicationsWebhookResponse
     {
@@ -150,6 +165,8 @@ abstract class Client extends Root
      * @param ApplicationsGetByIds $applicationsGetByIds
      *
      * @return ?ApplicationsGetByIdsResponse
+     *
+     * @throws Exception
      */
     public function applicationsGetByIds( ApplicationsGetByIds $applicationsGetByIds )
     {

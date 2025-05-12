@@ -14,6 +14,12 @@ use andy87\avito\client\components\response\dto\Applies;
  */
 class AppilicationsGetIdsResponse extends Response
 {
+    /** @var class-string[]  */
+    public const MAPPING = [
+        'applies' => [ Applies::class ]
+    ];
+
+
     /** @var ?Applies[] */
     public ?array $applies = null;
 

@@ -19,7 +19,7 @@ use andy87\avito\client\components\response\AppilicationsGetIdsResponse;
  *
  * @package src\components\resources\applicationsGetIds
  */
-final class applicationsGetIds extends ParamsEmployee
+final class ApplicationsGetIds extends ParamsEmployee
 {
     public const RESPONSE_CLASS = AppilicationsGetIdsResponse::class;
 
