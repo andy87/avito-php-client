@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\components\response;
+namespace andy87\avito\client\components\resources;
 
 use andy87\avito\client\components\base\Response;
 
@@ -19,7 +19,7 @@ use andy87\avito\client\components\base\Response;
  *      "token_type": "Bearer"
  * }
  *
- * @package src\components\resources\token
+ * @package src\components\resources
  */
 final class TokenResponse extends Response
 {

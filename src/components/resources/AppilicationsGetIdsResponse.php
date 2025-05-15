@@ -1,16 +1,16 @@
 <?php
 
-namespace andy87\avito\client\components\response;
+namespace andy87\avito\client\components\resources;
 
 use andy87\avito\client\components\base\Response;
-use andy87\avito\client\components\response\dto\Applies;
+use andy87\avito\client\components\resources\dto\Applies;
 
 /**
  * Class AppilicationsGetIdsResponse
  *
  * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsGetIds
  *
- * @package src\components\response
+ * @package src\components\resources
  */
 class AppilicationsGetIdsResponse extends Response
 {

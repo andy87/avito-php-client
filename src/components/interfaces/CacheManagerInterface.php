@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\components\interfaces;
 
-use andy87\avito\client\components\response\TokenResponse;
+use andy87\avito\client\components\resources\TokenResponse;
 
 /**
  * Interface CacheManagerInterface

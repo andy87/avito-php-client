@@ -1,12 +1,11 @@
 <?php
 
-namespace andy87\avito\client\data;
+namespace andy87\avito\client\prompts;
 
 use andy87\avito\client\components\Endpoints;
 use andy87\avito\client\components\Authorization;
-use andy87\avito\client\components\data\ParamsEmployee;
-use andy87\avito\client\components\response\AppilicationsGetIdsResponse;
-use andy87\avito\client\components\response\ApplicationsGetByIdsResponse;
+use andy87\avito\client\components\prompt\PromptEmployee;
+use andy87\avito\client\components\resources\AppilicationsGetIdsResponse;
 
 /**
  * Получение идентификаторов откликов
@@ -20,14 +19,11 @@ use andy87\avito\client\components\response\ApplicationsGetByIdsResponse;
  *
  * @package src\components\resources\applicationsGetIds
  */
-final class ApplicationsGetByIds extends ParamsEmployee
+final class ApplicationsGetIds extends PromptEmployee
 {
-
-    public const RESPONSE_CLASS = ApplicationsGetByIdsResponse::class;
-
+    public const RESPONSE_CLASS = AppilicationsGetIdsResponse::class;
 
     public string $endpoint = Endpoints::APPLICATIONS_GET_IDS;
-
 
     public ?string $authorization = Authorization::ACCESS_TOKEN;
 

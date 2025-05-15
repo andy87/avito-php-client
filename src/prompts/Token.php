@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\data;
+namespace andy87\avito\client\prompts;
 
 use andy87\avito\client\components\Endpoints;
 use andy87\avito\client\components\GrandType;
-use andy87\avito\client\components\base\Params;
-use andy87\avito\client\components\response\TokenResponse;
+use andy87\avito\client\components\base\Prompt;
+use andy87\avito\client\components\resources\TokenResponse;
 
 /**
  * Получение access token
@@ -16,7 +16,7 @@ use andy87\avito\client\components\response\TokenResponse;
  *
  * @package src\components\resources\token
  */
-final class Token extends Params
+final class Token extends Prompt
 {
     /** @var string  */
     public const RESPONSE_CLASS = TokenResponse::class;
@@ -25,9 +25,6 @@ final class Token extends Params
 
     /** @var string */
     public string $endpoint = Endpoints::TOKEN;
-
-    /** @var string */
-    public string $schema = self::CONTENT_TYPE_FORM_URLENCODED;
 
 
     /** @var string */

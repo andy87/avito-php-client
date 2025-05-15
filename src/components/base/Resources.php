@@ -5,6 +5,8 @@ namespace andy87\avito\client\components\base;
 /**
  * Class Resources
  *
+ * Класс с логикой построения объекта
+ *
  * @package src\components\base
  */
 abstract class Resources
@@ -24,6 +26,8 @@ abstract class Resources
 
 
     /**
+     * Цикл обработки и установки свойств объекта
+     *
      * @param array $properties
      *
      * @return void
@@ -45,6 +49,9 @@ abstract class Resources
     }
 
     /**
+     * Подготовка значения свойства для установки в объект
+     * с учётом его типа и возможного рекурсивного создания объектов
+     *
      * @param mixed $classConfig
      * @param mixed $data
      *

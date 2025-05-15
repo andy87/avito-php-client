@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\components\response;
+namespace andy87\avito\client\components\resources;
 
 use andy87\avito\client\components\base\Query;
 use andy87\avito\client\components\base\Response;
@@ -14,7 +14,7 @@ use andy87\avito\client\components\base\Response;
  *
  * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookPut
  *
- * @package src\components\resources\applicationsWebhook
+ * @package src\components\resources
  */
 final class ApplicationsWebhookResponse extends Response
 {

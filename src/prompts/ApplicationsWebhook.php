@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\data;
+namespace andy87\avito\client\prompts;
 
 use andy87\avito\client\components\Endpoints;
-use andy87\avito\client\components\base\Params;
+use andy87\avito\client\components\base\Prompt;
 use andy87\avito\client\components\Authorization;
-use andy87\avito\client\components\response\ApplicationsWebhookResponse;
+use andy87\avito\client\components\resources\ApplicationsWebhookResponse;
 
 /**
  * Включение уведомлений по откликам (webhook)
@@ -19,7 +19,7 @@ use andy87\avito\client\components\response\ApplicationsWebhookResponse;
  *
  * @package src\components\resources\applicationsWebhook
  */
-final class ApplicationsWebhook extends Params
+final class ApplicationsWebhook extends Prompt
 {
     public const RESPONSE_CLASS = ApplicationsWebhookResponse::class;
 

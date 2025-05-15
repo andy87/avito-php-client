@@ -16,28 +16,38 @@ abstract class Query
     public const PUT = 'PUT';
     public const DELETE = 'DELETE';
 
+
     public const CONTENT_TYPE_JSON = 'application/json';
     public const CONTENT_TYPE_FORM_URLENCODED = 'application/x-www-form-urlencoded';
 
 
 
-    /** @var string */
+    /** @var string URL адрес запроса */
     protected string $endpoint;
 
-    /** @var string */
+    /**
+     * @var string Метод запроса
+     *
+     * Не константа потому как может менять значение
+     */
     protected string $method = self::GET;
 
-    /** @var string  */
+    /**
+     * @var string Тип данные для заголовков `Content-Type`
+     *
+     * Не константа потому как может менять значение
+     */
     protected string $contentType = self::CONTENT_TYPE_JSON;
 
-    /** @var array */
+
+    /** @var array Заголовки */
     protected array $headers = [];
 
-    /** @var ?array */
+    /** @var ?array Отправляемые данные */
     protected ?array $data = null;
 
-    /** @var ?array */
-    protected ?array $curlInfo = null;
+    /** @var ?array Данные дополнительных параметров */
+    protected ?array $params = null;
 
 
 
@@ -48,7 +58,7 @@ abstract class Query
     {
         if (!empty( $this->data ))
         {
-            $this->endpoint .= ( '?' . http_build_query( $this->data ) );
+            $this->setEndpoint( $this->endpoint . '?' . http_build_query( $this->data ) );
 
             $this->data = [];
         }

@@ -2,24 +2,28 @@
 
 namespace andy87\avito\client;
 
-use andy87\avito\client\components\response\ApplicationsGetByIdsResponse;
-use andy87\avito\client\data\ApplicationsGetByIds;
-use andy87\avito\client\data\Token;
-use andy87\avito\client\components\GrandType;
-use andy87\avito\client\components\base\Operator;
-use andy87\avito\client\components\base\Query;
-use andy87\avito\client\components\base\Params;
-use andy87\avito\client\data\ApplicationsWebhook;
-use andy87\avito\client\components\response\TokenResponse;
-use andy87\avito\client\components\response\ApplicationsWebhookResponse;
 use Exception;
+use andy87\avito\client\prompts\Token;
+use andy87\avito\client\components\GrandType;
+use andy87\avito\client\components\base\Query;
+use andy87\avito\client\prompts\ApplicationsWebhook;
+use andy87\avito\client\prompts\ApplicationsGetByIds;
+use andy87\avito\client\components\clients\ClientLogic;
+use andy87\avito\client\components\resources\TokenResponse;
+use andy87\avito\client\components\resources\ApplicationsWebhookResponse;
+use andy87\avito\client\components\resources\ApplicationsGetByIdsResponse;
 
 /**
- * Class SdkAvito
+ * Class Client
+ *
+ * Класс с реализацией конкретных методов API
+ *
+ * Для работы с классом создайте свой класс, который будет наследоваться от него.
+ * В классе потомке переопределите свойство `$classOperator`
  *
  * @package src
  */
-abstract class Client extends Operator
+abstract class Client extends ClientLogic
 {
     /**
      * Получение access token
@@ -86,6 +90,7 @@ abstract class Client extends Operator
 
         return $response;
     }
+
     /**
      * Получение информации о подписках (webhook)
      * Получение информации по существующим подпискам на создание и обновление откликов
@@ -176,22 +181,36 @@ abstract class Client extends Operator
         return $response;
     }
 
-
-
     /**
-     * Процесс проверки метода запроса с корректировкой
+     * @param string $grantType Тип авторизации
      *
-     * @param string $method
-     * @param Params $params
+     * @return ?TokenResponse
      *
-     * @return Params
+     * @throws Exception
      */
-    private function prepareMethod( string $method, Params $params ): Params
+    public function authorization( string $grantType ): ?TokenResponse
     {
-        if ( $params->getMethod() !== $method ) {
-            $params->setMethod( $method );
+        $tokenResponse = match ($grantType)
+        {
+            GrandType::CLIENT_CREDENTIALS => $this->getAccessToken( $this->token ),
+            GrandType::AUTHORIZATION_CODE => $this->getAccessTokenAuthorizationCode( $this->token ),
+            GrandType::REFRESH_TOKEN => $this->refreshAccessTokenAuthorizationCode( $this->token ),
+        };
+
+        if ( $tokenResponse->validate() )
+        {
+            $this->setCache( $tokenResponse );
+
+            return $tokenResponse;
         }
 
-        return $params;
+        $this->errorHandler([
+            'datetime' => date('Y-m-d H:i:s'),
+            '$grantType' => $grantType,
+            'token' => $this->token,
+            'request' => $tokenResponse
+        ]);
+
+        return null;
     }
 }

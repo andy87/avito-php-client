@@ -1,11 +1,11 @@
 <?php
 
-namespace andy87\avito\client\components\response\dto;
+namespace andy87\avito\client\components\resources\dto;
 
 /**
  * Class Applies
  *
- * @package andy87\avito\client\components\response\dto
+ * @package src\components\resources\dto
  */
 final class Applies
 {

@@ -9,7 +9,7 @@ use CurlHandle;
  *
  * @package src\components\base
  */
-abstract class Params extends Query
+abstract class Prompt extends Query
 {
     /** @var string  */
     public const RESPONSE_CLASS = Response::class;

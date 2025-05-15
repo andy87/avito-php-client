@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace andy87\avito\client\yii2\redis;
+namespace andy87\avito\client\frameworks\yii2\redis;
 
 use Yii;
 use yii\redis\Connection;
 use yii\base\InvalidConfigException;
-use andy87\avito\client\components\response\TokenResponse;
+use andy87\avito\client\components\resources\TokenResponse;
 use andy87\avito\client\components\interfaces\CacheManagerInterface;
 
 /**
  * Class RedisAccessCacheManager
  *
- * @package app\components\sdk\sdkAvito\mode\yii2\redis
+ * @package src\frameworks\yii2\redis
  */
 class CacheManager implements CacheManagerInterface
 {

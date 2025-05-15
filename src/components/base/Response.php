@@ -2,11 +2,13 @@
 
 namespace andy87\avito\client\components\base;
 
-use andy87\avito\client\components\response\dto\Error;
-use andy87\avito\client\components\response\dto\Result;
+use andy87\avito\client\components\resources\dto\Error;
+use andy87\avito\client\components\resources\dto\Result;
 
 /**
  * Class Response
+ *
+ * Класс с данными ответа от сервера партнёра
  *
  * @package src\components\base
  */
@@ -56,5 +58,5 @@ abstract class Response extends Resources
      *
      * @return bool
      */
-    abstract public function validate(?string $rules = null ): bool;
+    abstract public function validate( ?string $rules = null ): bool;
 }
