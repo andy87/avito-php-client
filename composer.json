@@ -23,7 +23,8 @@
   ],
 
   "require": {
-    "php": ">=8.0"
+    "php": ">=8.0",
+    "andy87/sdk-php-client": "dev-main"
   },
 
   "autoload": {
@@ -39,7 +40,7 @@
     },
     {
       "type": "vcs",
-      "url": "git@github.com:andy87/sdk-php-client.git"
+      "url": "https://github.com/andy87/sdk-php-client"
     }
   ]
 }

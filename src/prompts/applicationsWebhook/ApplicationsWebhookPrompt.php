@@ -1,49 +1,42 @@
 <?php
 
-namespace andy87\client\avito\prompts\applicationsWebhook;
+namespace andy87\avito\client\prompts\applicationsWebhook;
 
-use BaseClient\BasePrompt;
-use BaseClient\PromptInterface;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookGetSchema;
+use andy87\sdk\client\base\Prompt;
 
 /**
- * Prompt for retrieving information about Avito webhook subscriptions (applications).
+ * Параметры запроса.
  */
-class ApplicationsWebhookPrompt extends BasePrompt implements PromptInterface
+class ApplicationsWebhookPrompt extends Prompt
 {
-    /**
-     * Webhook URL to filter by (optional).
-     */
+    /** @var string Значение по умолчанию для секретного ключа вебхука. */
+    public const DEFAULT_SECRET = 'secret';
+
+
+
+    /** @var string $schema JSON Schema для валидации запроса. */
+    public string $schema = ApplicationsWebhookGetSchema::class;
+
+
+    /** @var string $url Webhook URL to filter by (optional). */
     public string $url;
 
-    /**
-     * Webhook secret key to filter by (optional).
-     */
+    /** @var string $secret Webhook secret key to filter by (optional). */
     public string $secret;
+
+
 
     /**
      * Initialize a new ApplicationsWebhookPrompt.
+     *
      * @param string $url Webhook URL to query.
      * @param string $secret Secret key of the webhook (if required).
      */
-    public function __construct(string $url, string $secret = 'secret')
+    public function __construct( string $url, string $secret )
     {
         $this->url = $url;
-        $this->secret = $secret;
-        // Configure the HTTP request details for the webhook info endpoint
-        $this->method = 'GET';
-        $this->path = 'applications/webhook';
-        // Include URL and secret as query parameters
-        $this->body = [
-            'url'    => $this->url,
-            'secret' => $this->secret,
-        ];
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getResponseClass(): string
-    {
-        return ApplicationsWebhookResponse::class;
+        $this->secret = $secret;
     }
 }

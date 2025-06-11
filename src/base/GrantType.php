@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\client\avito\core;
+namespace andy87\avito\client\core;
 
 abstract class GrantType
 {
