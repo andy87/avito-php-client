@@ -3,6 +3,7 @@
 namespace andy87\avito\client\base;
 
 use andy87\avito\client\Config;
+use andy87\sdk\client\base\Account;
 use andy87\sdk\client\SdkClient;
 use andy87\avito\client\prompts\token\AccessTokenPrompt;
 use andy87\avito\client\schema\token\AccessTokenSchema;
@@ -19,23 +20,35 @@ abstract class Client extends SdkClient
     private ?AccessTokenSchema $accessTokenSchema = null;
 
 
-
     /**
+     * @param Account $account
+     *
      * @return bool
      */
-    public function authorization(): bool
+    public function authorization( Account $account ): bool
     {
         $accessTokenPrompt = new AccessTokenPrompt(
-            $this->config->account->clientId,
-            $this->config->account->clientSecret
+            $account->clientId,
+            $account->clientSecret
         );
 
-        $this->accessTokenSchema = $this->getAccessToken($accessTokenPrompt);
+        if ( $this->modules->cache )
+        {
+            $this->accessTokenSchema = $this->modules->cache->getData( $account, $this->accessTokenSchema );
+        }
+
+        if ( !$this->accessTokenSchema )
+        {
+            $this->accessTokenSchema = $this->getAccessToken($accessTokenPrompt);
+
+            if ( $this->modules->cache )
+            {
+                $this->modules->cache->setData( $this->accessTokenSchema );
+            }
+        }
 
         if ( $this->accessTokenSchema )
         {
-            $this->setupCache( $this->accessTokenSchema );
-
             return true;
         }
 
@@ -61,5 +74,4 @@ abstract class Client extends SdkClient
 
         return ($response instanceof AccessTokenSchema) ? $response :null;
     }
-
 }

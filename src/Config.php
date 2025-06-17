@@ -2,9 +2,8 @@
 
 namespace andy87\avito\client;
 
-
-use andy87\avito\client\core\Account;
 use andy87\sdk\client\helpers\Port;
+use andy87\avito\client\base\Account;
 
 /**
  * Configuration for Avito API client.

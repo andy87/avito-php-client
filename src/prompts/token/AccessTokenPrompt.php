@@ -3,7 +3,7 @@
 namespace andy87\avito\client\prompts\token;
 
 use andy87\sdk\client\base\Prompt;
-use andy87\avito\client\core\GrantType;
+use andy87\avito\client\base\GrantType;
 use andy87\avito\client\schema\token\AccessTokenSchema;
 
 /**
