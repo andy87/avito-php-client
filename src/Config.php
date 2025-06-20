@@ -3,14 +3,14 @@
 namespace andy87\avito\client;
 
 use andy87\sdk\client\helpers\Port;
-use andy87\avito\client\base\Account;
+use andy87\avito\client\ext\Account;
 
 /**
  * Configuration for Avito API client.
  *
  * @property Account $account
  */
-class Config extends \andy87\sdk\client\base\Config
+class Config extends \andy87\sdk\client\base\BaseConfig
 {
     public string $port = Port::HTTPS;
 

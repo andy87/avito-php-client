@@ -2,14 +2,14 @@
 
 namespace andy87\avito\client\prompts\token;
 
-use andy87\sdk\client\base\Prompt;
-use andy87\avito\client\base\GrantType;
+use andy87\avito\client\helpers\GrantType;
 use andy87\avito\client\schema\token\AccessTokenSchema;
+use andy87\sdk\client\base\BasePrompt;
 
 /**
  * Параметры запроса.
  */
-class AccessTokenPrompt extends Prompt
+class AccessTokenPrompt extends BasePrompt
 {
     public string $schema = AccessTokenSchema::class;
 
@@ -36,7 +36,7 @@ class AccessTokenPrompt extends Prompt
      * @param string $clientSecret Avito API Client Secret.
      * @param string $grantType OAuth grant type (default "client_credentials").
      */
-    public function __construct(string $clientId, string $clientSecret, string $grantType = GrantType::GRANT_TYPE_CLIENT_CREDENTIALS )
+    public function __construct(string $clientId, string $clientSecret, string $grantType = GrantType::CLIENT_CREDENTIALS )
     {
         $this->clientId = $clientId;
 

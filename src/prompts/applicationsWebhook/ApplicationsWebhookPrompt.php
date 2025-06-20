@@ -3,16 +3,15 @@
 namespace andy87\avito\client\prompts\applicationsWebhook;
 
 use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookGetSchema;
-use andy87\sdk\client\base\Prompt;
+use andy87\sdk\client\base\BasePrompt;
 
 /**
  * Параметры запроса.
  */
-class ApplicationsWebhookPrompt extends Prompt
+class ApplicationsWebhookPrompt extends BasePrompt
 {
     /** @var string Значение по умолчанию для секретного ключа вебхука. */
     public const DEFAULT_SECRET = 'secret';
-
 
 
     /** @var string $schema JSON Schema для валидации запроса. */
