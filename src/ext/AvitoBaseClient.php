@@ -3,22 +3,22 @@
 namespace andy87\avito\client\ext;
 
 use Exception;
-use andy87\avito\client\Config;
 use andy87\sdk\client\SdkClient;
-use andy87\sdk\client\base\BaseSchema;
-use andy87\sdk\client\base\BaseAccount;
+use andy87\avito\client\AvitoConfig;
+use andy87\sdk\client\base\components\Schema;
+use andy87\sdk\client\base\components\Account;
 use andy87\sdk\client\core\transport\Response;
-use andy87\avito\client\prompts\token\AccessTokenPrompt;
 use andy87\avito\client\schema\token\AccessTokenSchema;
+use andy87\avito\client\prompts\token\AccessTokenPrompt;
 
 /**
  * Client for Avito API, extending the base client with specific API methods.
  *
  * Тут в методе `authorization` описывается функционал авторизации для получения токена доступа к Avito API.
  *
- * @property Config $config
+ * @property AvitoConfig $config
  */
-abstract class Client extends SdkClient
+abstract class AvitoBaseClient extends SdkClient
 {
     private ?AccessTokenSchema $accessTokenSchema = null;
 
@@ -38,13 +38,13 @@ abstract class Client extends SdkClient
     /**
      * Авторизация для получения токена доступа к Avito API.
      *
-     * @param BaseAccount $account
+     * @param Account $account
      *
      * @return bool
      *
      * @throws Exception
      */
-    public function authorization( BaseAccount $account ): bool
+    public function authorization( Account $account ): bool
     {
         if ( $this->modules->cache )
         {
@@ -85,11 +85,11 @@ abstract class Client extends SdkClient
      *
      * @param AccessTokenPrompt $accessTokenPrompt Объект с данными для запроса токена.
      *
-     * @return ?BaseSchema Объект ответа с токеном или null в случае ошибки.
+     * @return ?Schema Объект ответа с токеном или null в случае ошибки.
      *
      * @throws Exception
      */
-    public function getAccessToken( AccessTokenPrompt $accessTokenPrompt ): ?BaseSchema
+    public function getAccessToken( AccessTokenPrompt $accessTokenPrompt ): ?Schema
     {
         $schema = $this->send( $accessTokenPrompt );
 

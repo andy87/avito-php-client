@@ -2,13 +2,12 @@
 
 namespace andy87\avito\client\schema\applicationsWebhook;
 
-use andy87\sdk\client\base\Schema;
-use andy87\sdk\client\base\interfaces\SchemaInterface;
+use andy87\sdk\client\base\components\Schema;
 
 /**
  * Схема ожидаемого ответа от API.
  */
-class ApplicationsWebhookGetSchema extends Schema implements SchemaInterface
+class ApplicationsWebhookGetSchema extends Schema
 {
     /**
      *

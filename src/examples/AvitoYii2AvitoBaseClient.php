@@ -2,14 +2,14 @@
 
 namespace andy87\avito\client\examples;
 
-use andy87\avito\client\ext\Client;
+use andy87\avito\client\ext\AvitoBaseClient;
 
 /**
  * Class AvitoYii2Client
  *
  * @package src/examples
  */
-class AvitoYii2Client extends Client
+class AvitoYii2AvitoBaseClient extends AvitoBaseClient
 {
     public function errorHandler(array|string $data): void
     {

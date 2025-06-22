@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\schema\token;
 
-use andy87\sdk\client\base\Schema;
+use andy87\sdk\client\base\components\Schema;
 
 /**
  * Схема ожидаемого ответа от API.

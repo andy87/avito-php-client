@@ -3,13 +3,13 @@
 namespace andy87\avito\client\prompts\token;
 
 use andy87\avito\client\helpers\GrantType;
+use andy87\sdk\client\base\components\Prompt;
 use andy87\avito\client\schema\token\AccessTokenSchema;
-use andy87\sdk\client\base\BasePrompt;
 
 /**
  * Параметры запроса.
  */
-class AccessTokenPrompt extends BasePrompt
+class AccessTokenPrompt extends Prompt
 {
     public string $schema = AccessTokenSchema::class;
 

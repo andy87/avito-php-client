@@ -2,9 +2,9 @@
 
 namespace andy87\avito\client;
 
-use andy87\avito\client\helpers\GrantType;
 use Exception;
-use andy87\avito\client\ext\Account;
+use andy87\avito\client\ext\AvitoAccount;
+use andy87\avito\client\helpers\GrantType;
 use andy87\avito\client\schema\token\AccessTokenSchema;
 use andy87\avito\client\prompts\token\AccessTokenPrompt;
 use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPrompt;
@@ -14,6 +14,8 @@ use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookGetSchema;
  * AvitoService
  *
  * Предоставляет методы для работы с Avito API.
+ *
+ * Сервис служит для упрощения взаимодействия с API, убирая необходимость создания экземпляров Prompts и Client вручную.
  */
 class AvitoService
 {
@@ -21,7 +23,7 @@ class AvitoService
 
     public function __construct( string $clientClass, string $configClass,  string $clientId, string $clientSecret ) {
 
-        $account = new Account( $clientId, $clientSecret );
+        $account = new AvitoAccount( $clientId, $clientSecret );
 
         $config = new $configClass( $account );
 
@@ -31,18 +33,21 @@ class AvitoService
     /**
      * @param string $grantType
      *
-     * @return AccessTokenSchema
+     * @return ?AccessTokenSchema
      *
      * @throws Exception
      */
-    public function getAccessToken( string $grantType = GrantType::CLIENT_CREDENTIALS ): AccessTokenSchema
+    public function getAccessToken( string $grantType = GrantType::CLIENT_CREDENTIALS ): ?AccessTokenSchema
     {
-        /** @var Account $account */
+        /** @var AvitoAccount $account */
         $account = $this->client->config->getAccount();
 
         $promptToken = new AccessTokenPrompt( $account->clientId, $account->clientSecret, $grantType );
 
-        return $this->client->getAccessToken( $promptToken );
+        /** @var ?AccessTokenSchema $response */
+        $response = $this->client->getAccessToken( $promptToken );
+
+        return $response;
     }
 
     /**
@@ -57,6 +62,9 @@ class AvitoService
     {
         $applicationsWebhookPrompt = new ApplicationsWebhookPrompt( $url, $secret );
 
-        return $this->client->applicationsWebhookGet( $applicationsWebhookPrompt );
+        /** @var ?ApplicationsWebhookGetSchema $response */
+        $response = $this->client->applicationsWebhookGet( $applicationsWebhookPrompt );
+
+        return $response;
     }
 }

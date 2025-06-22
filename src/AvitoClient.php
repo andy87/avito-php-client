@@ -3,14 +3,14 @@
 namespace andy87\avito\client;
 
 use Exception;
-use andy87\avito\client\ext\Client;
+use andy87\avito\client\ext\AvitoBaseClient;
 use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPrompt;
 use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookGetSchema;
 
 /**
  * AvitoClient
  */
-abstract class AvitoClient extends Client
+abstract class AvitoClient extends AvitoBaseClient
 {
     // тут будут все запросы к API Avito
 

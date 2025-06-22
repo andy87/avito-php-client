@@ -4,13 +4,13 @@ namespace example;
 
 
 use andy87\avito\client\AvitoService;
-use andy87\avito\client\Config;
-use andy87\avito\client\examples\AvitoYii2Client;
+use andy87\avito\client\AvitoConfig;
+use andy87\avito\client\examples\AvitoYii2AvitoBaseClient;
 
 
 $avitoService = new AvitoService(
-    AvitoYii2Client::class,
-    Config::class,
+    AvitoYii2AvitoBaseClient::class,
+    AvitoConfig::class,
     Yii::$app->params['avito.clientId'],
     Yii::$app->params['avito.clientSecret']
 );

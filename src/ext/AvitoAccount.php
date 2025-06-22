@@ -2,7 +2,8 @@
 
 namespace andy87\avito\client\ext;
 
-use andy87\sdk\client\base\BaseAccount;
+
+use andy87\sdk\client\base\components\Account;
 
 /**
  * Класс Account.
@@ -11,7 +12,7 @@ use andy87\sdk\client\base\BaseAccount;
  *
  * @package src\base
  */
-class Account extends BaseAccount
+class AvitoAccount extends Account
 {
     /**
      * Конструктор класса Account.
