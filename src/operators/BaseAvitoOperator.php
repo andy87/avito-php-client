@@ -7,7 +7,7 @@ use andy87\avito\client\AvitoClient;
 /**
  * Базовый класс для сервисов Avito
  *
- * @package src/services
+ * @package src/operators
  */
 abstract class BaseAvitoOperator
 {

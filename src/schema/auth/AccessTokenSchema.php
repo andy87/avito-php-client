@@ -14,7 +14,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @package src/schema/auth
  */
-class AccessTokenSchema extends Schema
+final class AccessTokenSchema extends Schema
 {
     /**
      * @var string $access_token

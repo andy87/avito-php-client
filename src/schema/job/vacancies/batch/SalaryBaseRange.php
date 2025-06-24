@@ -9,7 +9,7 @@ use andy87\avito\client\schema\dto\Diapason;
  *
  * @package src/schema/job/vacancies/batch
  */
-class SalaryBaseRange extends Diapason
+final class SalaryBaseRange extends Diapason
 {
 
 }

@@ -7,7 +7,7 @@ namespace andy87\avito\client\operators;
  *
  * @documentation https://developers.avito.ru/api-catalog/accounts-hierarchy/documentation
  *
- * @package src/services
+ * @package src/operators
  */
 final class AccountsHierarchyOperator extends BaseAvitoOperator
 {

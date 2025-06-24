@@ -10,6 +10,8 @@ use andy87\sdk\client\base\components\Config;
  * Configuration for Avito API client.
  *
  * @property AvitoAccount $account
+ *
+ * @package src
  */
 final class AvitoConfig extends Config
 {

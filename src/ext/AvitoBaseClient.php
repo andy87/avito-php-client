@@ -4,12 +4,10 @@ namespace andy87\avito\client\ext;
 
 use Exception;
 use andy87\avito\client\AvitoConfig;
-use andy87\avito\client\AvitoOperatorManager;
 use andy87\avito\client\schema\auth\AccessTokenSchema;
 use andy87\sdk\client\SdkClient;
 use andy87\sdk\client\core\transport\Response;
 use andy87\sdk\client\base\components\Account;
-use andy87\sdk\client\base\modules\AbstractCache;
 use andy87\sdk\client\base\interfaces\ClientInterface;
 
 /**
@@ -18,6 +16,8 @@ use andy87\sdk\client\base\interfaces\ClientInterface;
  * Тут в методе `authorization` описывается функционал авторизации для получения токена доступа к Avito API.
  *
  * @property AvitoConfig $config
+ *
+ * @package src\ext
  */
 abstract class AvitoBaseClient extends SdkClient
 {
@@ -28,25 +28,9 @@ abstract class AvitoBaseClient extends SdkClient
 
 
 
-    public AvitoOperatorManager $operatorManager;
-
     protected ?AccessTokenSchema $accessTokenSchema = null;
 
 
-
-    /**
-     * Конструктор
-     *
-     * @param AvitoConfig $config
-     *
-     * @throws Exception
-     */
-    public function __construct( AvitoConfig $config )
-    {
-        parent::__construct( $config );
-
-        $this->operatorManager = new AvitoOperatorManager( $this );
-    }
 
     /**
      * Проверяет, является ли токен недействительным.
@@ -87,36 +71,29 @@ abstract class AvitoBaseClient extends SdkClient
      */
     public function authorization( Account $account ): bool
     {
-        /** @var AbstractCache $cache */
-        if ( $cache = $this->getModule(ClientInterface::CACHE) )
+        if ( $cache = $this->getModule( ClientInterface::CACHE ) )
         {
             $this->accessTokenSchema = $cache->getData( $account );
         }
 
         if ( !$this->accessTokenSchema )
         {
-            $this->accessTokenSchema = $this->operatorManager->authOperator->getAccessToken();
-
-            if ( $this->accessTokenSchema instanceof AccessTokenSchema )
+            if ( $this->accessTokenSchema = $this->getAccessToken() )
             {
-                $accessTokenSchema = serialize($this->accessTokenSchema);
-
-                $cache->setData( $account, $accessTokenSchema );
+                $cache?->setData($account, $this->accessTokenSchema);
             }
         }
 
-        if ( $this->accessTokenSchema )
+        if ( !$this->accessTokenSchema )
         {
-            return true;
+            $this->errorHandler([
+                'method' => __METHOD__,
+                'message' => 'Access token schema is null.',
+                'func_get_args' => func_get_args(),
+            ]);
         }
 
-        $this->errorHandler([
-            'method' => __METHOD__,
-            'func_get_args' => func_get_args(),
-            'accessTokenSchema' => $this->accessTokenSchema
-        ]);
-
-        return false;
+        return ( $this->accessTokenSchema instanceof AccessTokenSchema );
     }
 
     /**
@@ -169,4 +146,14 @@ abstract class AvitoBaseClient extends SdkClient
 
         return $accessTokenSchema;
     }
+
+    /**
+     * Получение AccessTokenSchema.
+     *
+     * @return null|AccessTokenSchema
+     *
+     * @throws Exception
+     */
+    abstract function getAccessToken(): ?AccessTokenSchema;
+
 }

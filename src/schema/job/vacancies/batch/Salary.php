@@ -11,7 +11,7 @@ use andy87\avito\client\schema\dto\Diapason;
  *
  * @package src/schema/job/vacancies/batch
  */
-class Salary extends Diapason
+final class Salary extends Diapason
 {
 
 }

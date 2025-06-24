@@ -16,6 +16,8 @@ use andy87\avito\client\operators\AccountsHierarchyOperator;
  * @property AuthOperator $authOperator
  * @property AutoloadOperator $autoloadOperator
  * @property JobOperator $jobOperator
+ *
+ * @package src
  */
 class AvitoOperatorManager
 {

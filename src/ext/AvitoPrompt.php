@@ -8,6 +8,8 @@ use andy87\sdk\client\helpers\ContentType;
 
 /**
  * Prompt с доработками для Avito.
+ *
+ * @package src\ext
  */
 abstract class AvitoPrompt extends Prompt
 {

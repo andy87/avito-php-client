@@ -2,8 +2,6 @@
 
 namespace andy87\avito\client\schema\job\applicationsWebhook;
 
-use andy87\sdk\client\base\components\Schema;
-
 /**
  * Получение информации о подписках (webhook)
  *
@@ -11,9 +9,6 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookGet
  */
-abstract class ApplicationsWebhookSchema extends Schema
+class ApplicationsWebhookGetSchema extends ApplicationsWebhookSchema
 {
-    public string $secret;
-
-    public string $url;
 }

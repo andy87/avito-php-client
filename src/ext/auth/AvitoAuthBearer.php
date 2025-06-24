@@ -13,7 +13,7 @@ use andy87\sdk\client\base\interfaces\AuthorizationInterface;
  *
  * @package src/ext/auth
  */
-class AvitoAuthBearer implements AuthorizationInterface
+final class AvitoAuthBearer implements AuthorizationInterface
 {
     /**
      * @throws Exception

@@ -11,7 +11,7 @@ namespace andy87\avito\client\schema\job\applicationsWebhook;
  *
  * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookPut
  */
-final class ApplicationsWebhookPutSchema extends ApplicationsWebhookSchema
+final class ApplicationsWebhookPutSchema extends ApplicationsWebhookGetSchema
 {
 
 }

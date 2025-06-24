@@ -9,7 +9,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @package src/schema/dto
  */
-class Coordinates extends Schema
+final class Coordinates extends Schema
 {
     /** @var float $latitude Широта */
     public float $latitude;

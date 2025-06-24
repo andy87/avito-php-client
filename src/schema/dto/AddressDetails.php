@@ -9,7 +9,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @package src/schema/dto
  */
-class AddressDetails extends Schema
+final class AddressDetails extends Schema
 {
     public const MAPPING = [
         'coordinates' => Coordinates::class,

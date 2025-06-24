@@ -15,7 +15,7 @@ use andy87\avito\client\schema\job\resumes\ResumeGetItemSchema;
 use andy87\avito\client\schema\job\resumes\ResumeGetContactsSchema;
 use andy87\avito\client\schema\job\vacancies\batch\VacanciesBatchSchema;
 use andy87\avito\client\schema\job\applications\ApplicationsGetIdsSchema;
-use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookSchema;
+use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookGetSchema;
 use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookPutSchema;
 use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookDeleteSchema;
 
@@ -32,15 +32,15 @@ final class JobOperator extends BaseAvitoOperator
      * Получение информации о подписках (webhook)
      * Получение информации по существующим подпискам на создание и обновление откликов
      *
-     * @return ApplicationsWebhookSchema|null
+     * @return ApplicationsWebhookGetSchema|null
      *
      * @throws Exception
      */
-    public function applicationsWebhookGet(): ?ApplicationsWebhookSchema
+    public function applicationsWebhookGet(): ?ApplicationsWebhookGetSchema
     {
         $applicationsWebhookPrompt = new ApplicationsWebhookGetPrompt();
 
-        /** @var ApplicationsWebhookSchema|null $response */
+        /** @var ApplicationsWebhookGetSchema|null $response */
         $response = $this->client->send( $applicationsWebhookPrompt );
 
         return $response;

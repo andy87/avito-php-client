@@ -10,7 +10,7 @@ use andy87\sdk\client\base\components\Account;
  *
  * Содержет данные для аутентификации и авторизации.
  *
- * @package src\base
+ * @package src\ext
  */
 class AvitoAccount extends Account
 {

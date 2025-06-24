@@ -7,7 +7,7 @@ use andy87\sdk\client\base\components\Schema;
 /**
  * Диапазон значений.
  */
-class Diapason extends Schema
+abstract class Diapason extends Schema
 {
     /** @var int $from Начальное значение диапазона */
     public int $from;

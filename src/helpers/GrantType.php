@@ -6,6 +6,8 @@ namespace andy87\avito\client\helpers;
  * Класс GrantType
  *
  * Содержет список значений для свойства `grantType` в объекте `AccessTokenPrompt`
+ *
+ * @package src/helpers
  */
 abstract class GrantType
 {

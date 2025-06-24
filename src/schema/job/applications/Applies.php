@@ -9,7 +9,7 @@ namespace andy87\avito\client\schema\job\applications;
  *
  * @package src/schema/job/applications
  */
-class Applies
+final class Applies
 {
     /** @var null|string Дата создания */
     public ?string $created_at = null;

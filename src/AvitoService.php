@@ -13,6 +13,8 @@ use andy87\sdk\client\base\modules\{AbstractCache, AbstractLogger, AbstractTest,
  * Предоставляет методы для работы с Avito API.
  *
  * Сервис служит для упрощения взаимодействия с API, убирая необходимость создания экземпляров Prompts и Client вручную.
+ *
+ * @package src
  */
 class AvitoService
 {
