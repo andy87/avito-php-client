@@ -35,7 +35,7 @@ final class ResumeGetItemSchema extends Schema
     /** @var null|Params Данные рещзюме */
     public ?Params $params = null;
 
-    /** @var \andy87\avito\client\schema\job\resumes\photos\Photo[] Фотографии */
+    /** @var Photo[] Фотографии */
     public array $photos = [];
 
     /** @var null|int Зарплата */

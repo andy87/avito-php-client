@@ -2,6 +2,7 @@
 
 namespace andy87\avito\client\prompts\job\vacancies\batch;
 
+use andy87\avito\client\schema\job\vacancies\batch\VacanciesBatchSchema;
 use andy87\sdk\client\helpers\Method;
 use andy87\sdk\client\base\interfaces\AuthorizationInterface;
 use andy87\avito\client\ext\AvitoPrompt;
@@ -28,7 +29,7 @@ final class VacanciesBatchPrompt extends AvitoPrompt
 
 
     /** @var string Схема запроса, определяющая структуру и правила валидации. */
-    protected string $schema = \andy87\avito\client\schema\job\vacancies\batch\VacanciesBatchSchema::class;
+    protected string $schema = VacanciesBatchSchema::class;
 
 
     /** @var string Метод запроса */

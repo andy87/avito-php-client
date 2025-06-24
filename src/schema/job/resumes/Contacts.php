@@ -22,7 +22,7 @@ class Contacts extends Schema
     /** @var bool Признак того, что контакты уже куплены */
     public bool $already_bought = false;
 
-    /** @var \andy87\avito\client\schema\job\resumes\contacts\Contact[] Контакты */
+    /** @var Contact[] Контакты */
     public array $contacts = [];
 
     /** @var null|string Имя */

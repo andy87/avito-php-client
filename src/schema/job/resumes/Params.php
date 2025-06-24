@@ -39,13 +39,13 @@ class Params extends Schema
     /** @var null|string Образование */
     public ?string $education = null;
 
-    /** @var \andy87\avito\client\schema\job\resumes\params\Education[] Список образований */
+    /** @var Education[] Список образований */
     public array $education_list = [];
 
-    /** @var \andy87\avito\client\schema\job\resumes\params\Experience[] Список опыта работы */
+    /** @var Experience[] Список опыта работы */
     public array $experience_list = [];
 
-    /** @var \andy87\avito\client\schema\job\resumes\params\Language[] Список языков */
+    /** @var Language[] Список языков */
     public array $language_list = [];
 
     /** @var null|string Возможность переезда */
