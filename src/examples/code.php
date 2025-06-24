@@ -14,11 +14,13 @@ try
 
     $avitoService = new AvitoService($account);
 
-    $avitoService->applicationsWebhookGet();
+    $avitoService->getOperator()->authService->getAccessToken();
+    $avitoService->getOperator()->jobOperator->applicationsWebhookGet();
+    $avitoService->getOperator()->jobOperator->applicationsGetIds();
+    $avitoService->getOperator()->jobOperator->vacanciesBatch([3605081030]);
 
-    $vacancy_id = 3605081030;
 
-    $avitoService->vacancyGet($vacancy_id);
+    $client = new Avito
 
 } catch (\Exception $e) {
 

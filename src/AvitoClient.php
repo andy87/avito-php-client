@@ -2,23 +2,23 @@
 
 namespace andy87\avito\client;
 
-use Exception;
-use andy87\avito\client\helpers\GrantType;
 use andy87\avito\client\ext\AvitoBaseClient;
-use andy87\avito\client\prompts\resume\ResumeGetItemPrompt;
-use andy87\avito\client\prompts\token\AccessTokenPrompt;
-use andy87\avito\client\prompts\resume\ResumeGetContactsPrompt;
-use andy87\avito\client\prompts\vacancies\batch\VacanciesBatchPrompt;
-use andy87\avito\client\prompts\applications\ApplicationsGetIdsPrompt;
-use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPrompt;
-use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPutPrompt;
-use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookDeletePrompt;
-use andy87\avito\client\schema\token\AccessTokenSchema;
-use andy87\avito\client\schema\resumes\ResumeGetItemSchema;
-use andy87\avito\client\schema\resumes\ResumeGetContactsSchema;
-use andy87\avito\client\schema\vacancies\batch\VacanciesBatchSchema;
-use andy87\avito\client\schema\applications\ApplicationsGetIdsSchema;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookSchema;
+use andy87\avito\client\helpers\GrantType;
+use andy87\avito\client\prompts\auth\AccessTokenPrompt;
+use andy87\avito\client\prompts\job\applications\ApplicationsGetIdsPrompt;
+use andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookDeletePrompt;
+use andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookPrompt;
+use andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookPutPrompt;
+use andy87\avito\client\prompts\job\resume\ResumeGetContactsPrompt;
+use andy87\avito\client\prompts\job\resume\ResumeGetItemPrompt;
+use andy87\avito\client\prompts\job\vacancies\batch\VacanciesBatchPrompt;
+use andy87\avito\client\schema\auth\AccessTokenSchema;
+use andy87\avito\client\schema\job\applications\ApplicationsGetIdsSchema;
+use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookSchema;
+use andy87\avito\client\schema\job\resumes\ResumeGetContactsSchema;
+use andy87\avito\client\schema\job\resumes\ResumeGetItemSchema;
+use andy87\avito\client\schema\job\vacancies\batch\VacanciesBatchSchema;
+use Exception;
 
 /**
  * AvitoClient
@@ -32,7 +32,7 @@ abstract class AvitoClient extends AvitoBaseClient
      *
      * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/refreshAccessTokenAuthorizationCode
      *
-     * @return null|AccessTokenSchema
+     * @return null|\andy87\avito\client\schema\auth\AccessTokenSchema
      *
      * @throws Exception
      */
@@ -44,7 +44,7 @@ abstract class AvitoClient extends AvitoBaseClient
             GrantType::REFRESH_TOKEN
         );
 
-        /** @var null|AccessTokenSchema $accessTokenSchema */
+        /** @var null|\andy87\avito\client\schema\auth\AccessTokenSchema $accessTokenSchema */
         $accessTokenSchema = $this->send($accessTokenPrompt);
 
         return $accessTokenSchema;
@@ -99,7 +99,7 @@ abstract class AvitoClient extends AvitoBaseClient
      *
      * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookPut
      *
-     * @param ApplicationsWebhookPutPrompt $applicationsWebhookPutPrompt
+     * @param \andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookPutPrompt $applicationsWebhookPutPrompt
      *
      * @return ?ApplicationsWebhookSchema
      *
@@ -107,7 +107,7 @@ abstract class AvitoClient extends AvitoBaseClient
      */
     public function applicationsWebhookPut( ApplicationsWebhookPutPrompt $applicationsWebhookPutPrompt ): ?ApplicationsWebhookSchema
     {
-        /** @var null|ApplicationsWebhookSchema $applicationsWebhookSchema */
+        /** @var null|\andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookSchema $applicationsWebhookSchema */
         $applicationsWebhookSchema = $this->send( $applicationsWebhookPutPrompt );
 
         return $applicationsWebhookSchema;
@@ -123,7 +123,7 @@ abstract class AvitoClient extends AvitoBaseClient
      */
     public function resumeGetItem(ResumeGetItemPrompt $resumePrompt ): ResumeGetItemSchema
     {
-        /** @var null|ResumeGetItemSchema $resumeGetItemSchema */
+        /** @var null|\andy87\avito\client\schema\job\resumes\ResumeGetItemSchema $resumeGetItemSchema */
         $resumeGetItemSchema = $this->send( $resumePrompt );
 
         return $resumeGetItemSchema;
@@ -137,9 +137,9 @@ abstract class AvitoClient extends AvitoBaseClient
      *
      * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsGetIds
      *
-     * @param ApplicationsGetIdsPrompt $applicationsGetIdsPrompt
+     * @param \andy87\avito\client\prompts\job\applications\ApplicationsGetIdsPrompt $applicationsGetIdsPrompt
      *
-     * @return ?ApplicationsGetIdsSchema
+     * @return ?\andy87\avito\client\schema\job\applications\ApplicationsGetIdsSchema
      *
      * @throws Exception
      */
@@ -182,9 +182,9 @@ abstract class AvitoClient extends AvitoBaseClient
      *
      * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/resumeGetContacts
      *
-     * @param ResumeGetContactsPrompt $resumeGetContactsPrompt
+     * @param \andy87\avito\client\prompts\job\resume\ResumeGetContactsPrompt $resumeGetContactsPrompt
      *
-     * @return ?ResumeGetItemSchema
+     * @return ?\andy87\avito\client\schema\job\resumes\ResumeGetItemSchema
      *
      * @throws Exception
      */

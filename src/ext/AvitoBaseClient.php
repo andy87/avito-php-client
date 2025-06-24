@@ -2,19 +2,15 @@
 
 namespace andy87\avito\client\ext;
 
-use andy87\sdk\client\base\interfaces\ClientInterface;
-use andy87\sdk\client\base\modules\AbstractCache;
-use andy87\sdk\client\base\modules\AbstractLogger;
-use andy87\sdk\client\base\modules\AbstractTest;
-use andy87\sdk\client\base\modules\AbstractTransport;
 use Exception;
-use andy87\sdk\client\SdkClient;
 use andy87\avito\client\AvitoConfig;
-use andy87\sdk\client\base\components\Prompt;
+use andy87\avito\client\AvitoOperatorManager;
+use andy87\avito\client\schema\auth\AccessTokenSchema;
+use andy87\sdk\client\SdkClient;
 use andy87\sdk\client\core\transport\Response;
 use andy87\sdk\client\base\components\Account;
-use andy87\avito\client\schema\token\AccessTokenSchema;
-use andy87\avito\client\prompts\token\AccessTokenPrompt;
+use andy87\sdk\client\base\modules\AbstractCache;
+use andy87\sdk\client\base\interfaces\ClientInterface;
 
 /**
  * Client for Avito API, extending the base client with specific API methods.
@@ -22,8 +18,6 @@ use andy87\avito\client\prompts\token\AccessTokenPrompt;
  * Тут в методе `authorization` описывается функционал авторизации для получения токена доступа к Avito API.
  *
  * @property AvitoConfig $config
- *
- * @method AvitoRequest constructRequest(Prompt $prompt)
  */
 abstract class AvitoBaseClient extends SdkClient
 {
@@ -34,8 +28,25 @@ abstract class AvitoBaseClient extends SdkClient
 
 
 
+    public AvitoOperatorManager $operatorManager;
+
     protected ?AccessTokenSchema $accessTokenSchema = null;
 
+
+
+    /**
+     * Конструктор
+     *
+     * @param AvitoConfig $config
+     *
+     * @throws Exception
+     */
+    public function __construct( AvitoConfig $config )
+    {
+        parent::__construct( $config );
+
+        $this->operatorManager = new AvitoOperatorManager( $this );
+    }
 
     /**
      * Проверяет, является ли токен недействительным.
@@ -55,7 +66,9 @@ abstract class AvitoBaseClient extends SdkClient
 
             return match ($message)
             {
-                self::MESSAGE_INVALID_ACCESS_TOKEN, self::MESSAGE_ACCESS_TOKEN_EXPIRED, self::MESSAGE_BAD_BEARER_TOKEN => true,
+                self::MESSAGE_INVALID_ACCESS_TOKEN,
+                self::MESSAGE_ACCESS_TOKEN_EXPIRED,
+                self::MESSAGE_BAD_BEARER_TOKEN => true,
                 default => false,
             };
         }
@@ -82,12 +95,7 @@ abstract class AvitoBaseClient extends SdkClient
 
         if ( !$this->accessTokenSchema )
         {
-            $accessTokenPrompt = new AccessTokenPrompt(
-                $account->clientId,
-                $account->clientSecret
-            );
-
-            $this->accessTokenSchema = $this->getAccessToken($accessTokenPrompt);
+            $this->accessTokenSchema = $this->operatorManager->authOperator->getAccessToken();
 
             if ( $this->accessTokenSchema instanceof AccessTokenSchema )
             {
@@ -112,33 +120,6 @@ abstract class AvitoBaseClient extends SdkClient
     }
 
     /**
-     * Получение токена доступа для Avito API.
-     *
-     * @param AccessTokenPrompt $accessTokenPrompt Объект с данными для запроса токена.
-     *
-     * @return ?AccessTokenSchema Объект ответа с токеном или null в случае ошибки.
-     *
-     * @throws Exception
-     */
-    public function getAccessToken( AccessTokenPrompt $accessTokenPrompt ): ?AccessTokenSchema
-    {
-        /** @var AccessTokenSchema|null $schema */
-        $schema = $this->send( $accessTokenPrompt );
-
-        if ( !$schema )
-        {
-            $this->errorHandler([
-                'method' => __METHOD__,
-                'message' => 'Invalid response type',
-                'func_get_args' => func_get_args(),
-                'response' => $schema
-            ]);
-        }
-
-        return $schema;
-    }
-
-    /**
      * @return string
      *
      * @throws Exception
@@ -147,19 +128,45 @@ abstract class AvitoBaseClient extends SdkClient
     {
         if ( $this->accessTokenSchema === null )
         {
-            if ( $account = $this->getConfig()->getAccount() )
+            $this->accessTokenSchema = $this->getCacheAccessTokenSchema();
+
+            if ( !$this->accessTokenSchema )
             {
-                if ( !$this->authorization($account) )
+                if ($account = $this->getConfig()->getAccount())
                 {
-                    $this->errorHandler([
-                        'message' => 'Authorization failed. Please check your client ID and secret.',
-                        'client_id' => $account->clientId,
-                        'client_secret' => $account->clientSecret,
-                    ]);
+                    if ( !$this->authorization($account) )
+                    {
+                        $this->errorHandler([
+                            'message' => 'Authorization failed. Please check your client ID and secret.',
+                            'client_id' => $account->clientId,
+                            'client_secret' => $account->clientSecret,
+                        ]);
+                    }
                 }
             }
         }
 
         return $this->accessTokenSchema->access_token;
+    }
+
+    /**
+     * Получение access token из кэша.
+     *
+     * @return null|AccessTokenSchema
+     *
+     * @throws Exception
+     */
+    public function getCacheAccessTokenSchema(): ?AccessTokenSchema
+    {
+        $accessTokenSchema = null;
+
+        if ( $cache = $this->getModule( ClientInterface::CACHE ) )
+        {
+            $data = $cache->getData( $this->getConfig()->getAccount() );
+
+            $accessTokenSchema = unserialize( $data, ['allowed_classes' => [AccessTokenSchema::class]] );
+        }
+
+        return $accessTokenSchema;
     }
 }
