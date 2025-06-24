@@ -129,7 +129,7 @@ class AvitoService
     /**
      * @param array $data
      *
-     * @return bool|null
+     * @return null|bool
      *
      * @throws Exception
      */

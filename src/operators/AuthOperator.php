@@ -50,7 +50,7 @@ final class AuthOperator extends BaseAvitoOperator
      *
      * @param string $code
      *
-     * @return AccessTokenSchema|null
+     * @return null|AccessTokenSchema
      *
      * @throws Exception
      */
@@ -75,7 +75,7 @@ final class AuthOperator extends BaseAvitoOperator
      *
      * @param string $refresh_token
      *
-     * @return AccessTokenSchema|null
+     * @return null|AccessTokenSchema
      *
      * @throws Exception
      */

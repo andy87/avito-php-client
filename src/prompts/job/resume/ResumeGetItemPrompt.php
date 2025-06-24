@@ -65,8 +65,8 @@ final class ResumeGetItemPrompt extends AvitoPrompt
      * Конструктор класса ResumeGetItemPrompt.
      *
      * @param int $resume_id Идентификатор резюме
-     * @param string|null $fields Поля основного тела ответа (можно указать несколько значений через запятую). По умолчанию отображаются все поля.
-     * @param string|null $params Дополнительные поля, которые входят в params (можно указать несколько значений через запятую). По умолчанию отображаются все поля.
+     * @param null|string $fields Поля основного тела ответа (можно указать несколько значений через запятую). По умолчанию отображаются все поля.
+     * @param null|string $params Дополнительные поля, которые входят в params (можно указать несколько значений через запятую). По умолчанию отображаются все поля.
      * @param bool $photos Признак того, нужно ли возвращать картинки
      */
     public function __construct( int $resume_id, ?string $fields = null, ?string $params = null, bool $photos = false )

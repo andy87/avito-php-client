@@ -11,14 +11,14 @@ use andy87\sdk\client\base\components\Schema;
  */
 class FullName extends Schema
 {
-    /** @var string|null Имя */
+    /** @var null|string Имя */
     public ?string $first_name = null;
 
 
-    /** @var string|null Фамилия */
+    /** @var null|string Фамилия */
     public ?string $last_name = null;
 
 
-    /** @var string|null Отчество */
+    /** @var null|string Отчество */
     public ?string $patronymic = null;
 }

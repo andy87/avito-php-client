@@ -32,7 +32,7 @@ final class JobOperator extends BaseAvitoOperator
      * Получение информации о подписках (webhook)
      * Получение информации по существующим подпискам на создание и обновление откликов
      *
-     * @return ApplicationsWebhookGetSchema|null
+     * @return null|ApplicationsWebhookGetSchema
      *
      * @throws Exception
      */
@@ -40,7 +40,7 @@ final class JobOperator extends BaseAvitoOperator
     {
         $applicationsWebhookPrompt = new ApplicationsWebhookGetPrompt();
 
-        /** @var ApplicationsWebhookGetSchema|null $response */
+        /** @var null|ApplicationsWebhookGetSchema $response */
         $response = $this->client->send( $applicationsWebhookPrompt );
 
         return $response;
@@ -56,7 +56,7 @@ final class JobOperator extends BaseAvitoOperator
      * @param string $url
      * @param string $secret
      *
-     * @return ApplicationsWebhookPutSchema|null
+     * @return null|ApplicationsWebhookPutSchema
      *
      * @throws Exception
      */
@@ -64,7 +64,7 @@ final class JobOperator extends BaseAvitoOperator
     {
         $applicationsWebhookPutPrompt = new ApplicationsWebhookPutPrompt( $url, $secret );
 
-        /** @var ApplicationsWebhookPutSchema|null $response */
+        /** @var null|ApplicationsWebhookPutSchema $response */
         $response = $this->client->send( $applicationsWebhookPutPrompt );
 
         return $response;
@@ -76,7 +76,7 @@ final class JobOperator extends BaseAvitoOperator
      *
      * @param string $url
      *
-     * @return ApplicationsWebhookDeleteSchema|null
+     * @return null|ApplicationsWebhookDeleteSchema
      *
      * @throws Exception
      */
@@ -85,7 +85,7 @@ final class JobOperator extends BaseAvitoOperator
         $applicationsWebhookDeletePrompt = new ApplicationsWebhookDeletePrompt();
         $applicationsWebhookDeletePrompt->url = $url;
 
-        /** @var ApplicationsWebhookDeleteSchema|null $response */
+        /** @var null|ApplicationsWebhookDeleteSchema $response */
         $response = $this->client->send( $applicationsWebhookDeletePrompt );
 
         return $response;
@@ -112,7 +112,7 @@ final class JobOperator extends BaseAvitoOperator
     {
         $resumeGetItemPrompt = new ResumeGetItemPrompt( $resume_id, $fields, $params, $photos );
 
-        /** @var ResumeGetItemSchema|null $resumeGetItemSchema */
+        /** @var null|ResumeGetItemSchema $resumeGetItemSchema */
         $resumeGetItemSchema = $this->client->send( $resumeGetItemPrompt );
 
         return $resumeGetItemSchema;
