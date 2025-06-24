@@ -2,20 +2,27 @@
 
 namespace andy87\avito\client\prompts\applicationsWebhook;
 
-use andy87\sdk\client\base\components\Prompt;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookGetSchema;
+use andy87\avito\client\ext\AvitoPrompt;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookSchema;
 
 /**
  * Параметры запроса.
+ *
+ * Получение информации о подписках (webhook)
+ * Получение информации по существующим подпискам на создание и обновление откликов
+ *
+ * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookGet
+ *
+ * @package src/prompt/applicationsWebhook
  */
-class ApplicationsWebhookPrompt extends Prompt
+class ApplicationsWebhookPrompt extends AvitoPrompt
 {
     /** @var string Значение по умолчанию для секретного ключа вебхука. */
     public const DEFAULT_SECRET = 'secret';
 
 
     /** @var string $schema JSON Schema для валидации запроса. */
-    public string $schema = ApplicationsWebhookGetSchema::class;
+    public string $schema = ApplicationsWebhookSchema::class;
 
 
     /** @var string $url Webhook URL to filter by (optional). */

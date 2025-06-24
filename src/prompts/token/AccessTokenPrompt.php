@@ -2,29 +2,43 @@
 
 namespace andy87\avito\client\prompts\token;
 
+use andy87\avito\client\ext\AvitoPrompt;
 use andy87\avito\client\helpers\GrantType;
-use andy87\sdk\client\base\components\Prompt;
+use andy87\sdk\client\helpers\ContentType;
 use andy87\avito\client\schema\token\AccessTokenSchema;
 
 /**
- * Параметры запроса.
+ * Получение access token
+ * Получения временного ключа для авторизации
+ *
+ * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken
+ *
+ * @package src/prompts/token
  */
-class AccessTokenPrompt extends Prompt
+class AccessTokenPrompt extends AvitoPrompt
 {
-    public string $schema = AccessTokenSchema::class;
+    protected string $schema = AccessTokenSchema::class;
+
+    protected ?string $contentType = ContentType::X_WWW_FORM_URLENCODED;
 
 
     /**
-     * Avito API Client ID.
+     * @var string $clientId Avito API Client ID.
      */
     public string $clientId;
 
     /**
-     * Avito API Client Secret.
+     * @var string $clientSecret Avito API Client Secret.
      */
     public string $clientSecret;
 
-    /** OAuth grant type (e.g. "client_credentials"). */
+    /**
+     * Тип OAuth flow. Строка refresh_token
+     *
+     * @var string $grantType OAuth grant type (e.g. "client_credentials").
+     *
+     * Default: "refresh_token"
+     */
     public string $grantType;
 
 

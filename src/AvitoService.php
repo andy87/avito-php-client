@@ -8,7 +8,7 @@ use andy87\avito\client\helpers\GrantType;
 use andy87\avito\client\schema\token\AccessTokenSchema;
 use andy87\avito\client\prompts\token\AccessTokenPrompt;
 use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPrompt;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookGetSchema;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookSchema;
 
 /**
  * AvitoService
@@ -54,15 +54,15 @@ class AvitoService
      * @param string $url
      * @param string $secret
      *
-     * @return ?ApplicationsWebhookGetSchema
+     * @return ?ApplicationsWebhookSchema
      *
      * @throws Exception
      */
-    public function applicationsWebhookGet( string $url, string $secret = ApplicationsWebhookPrompt::DEFAULT_SECRET ): ?ApplicationsWebhookGetSchema
+    public function applicationsWebhookGet( string $url, string $secret = ApplicationsWebhookPrompt::DEFAULT_SECRET ): ?ApplicationsWebhookSchema
     {
         $applicationsWebhookPrompt = new ApplicationsWebhookPrompt( $url, $secret );
 
-        /** @var ?ApplicationsWebhookGetSchema $response */
+        /** @var ?ApplicationsWebhookSchema $response */
         $response = $this->client->applicationsWebhookGet( $applicationsWebhookPrompt );
 
         return $response;

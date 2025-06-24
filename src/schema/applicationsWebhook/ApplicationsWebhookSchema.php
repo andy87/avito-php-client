@@ -6,8 +6,9 @@ use andy87\sdk\client\base\components\Schema;
 
 /**
  * Схема ожидаемого ответа от API.
+ *
  */
-class ApplicationsWebhookGetSchema extends Schema
+class ApplicationsWebhookSchema extends Schema
 {
     /**
      *
