@@ -2,18 +2,18 @@
 
 namespace andy87\avito\client;
 
-use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookDeletePrompt;
-use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookGetPrompt;
-use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPutPrompt;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookDeleteSchema;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookPutSchema;
 use Exception;
 use andy87\avito\client\ext\AvitoAccount;
 use andy87\avito\client\helpers\GrantType;
-use andy87\avito\client\schema\token\AccessTokenSchema;
 use andy87\avito\client\prompts\token\AccessTokenPrompt;
 use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPrompt;
+use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookGetPrompt;
+use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookPutPrompt;
+use andy87\avito\client\prompts\applicationsWebhook\ApplicationsWebhookDeletePrompt;
+use andy87\avito\client\schema\token\AccessTokenSchema;
 use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookSchema;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookPutSchema;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookDeleteSchema;
 
 /**
  * AvitoService
@@ -96,6 +96,29 @@ class AvitoService
 
         return new $clientClass( $config );
     }
+
+    /**
+     * @param array $data
+     *
+     * @return ?bool
+     */
+    public function setCache( array $data ): ?bool
+    {
+        $account = $this->client->config->account;
+
+        return $this->client->modules?->cache->setData( $account, $data );
+    }
+
+    /**
+     * @return ?array
+     */
+    public function getCache(): ?array
+    {
+        $account = $this->client->config->account;
+
+        return $this->client->modules?->cache->getData( $account );
+    }
+
 
     /**
      * @param string $grantType
