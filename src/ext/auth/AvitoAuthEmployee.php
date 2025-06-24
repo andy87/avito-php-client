@@ -18,10 +18,8 @@ class AvitoAuthEmployee implements AuthorizationInterface
     /**
      * @throws Exception
      */
-    public function run( AvitoClient|AbstractClient $client, Query $query ): Query
+    public function run( AvitoClient|AbstractClient $client, Query $query ): void
     {
         $query->addCustomHeaders([ 'X-Employee' => 'true' ] );
-
-        return $query;
     }
 }
