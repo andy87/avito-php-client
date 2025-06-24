@@ -2,6 +2,11 @@
 
 namespace andy87\avito\client\ext;
 
+use andy87\sdk\client\base\interfaces\ClientInterface;
+use andy87\sdk\client\base\modules\AbstractCache;
+use andy87\sdk\client\base\modules\AbstractLogger;
+use andy87\sdk\client\base\modules\AbstractTest;
+use andy87\sdk\client\base\modules\AbstractTransport;
 use Exception;
 use andy87\sdk\client\SdkClient;
 use andy87\avito\client\AvitoConfig;
@@ -22,15 +27,15 @@ use andy87\avito\client\prompts\token\AccessTokenPrompt;
  */
 abstract class AvitoBaseClient extends SdkClient
 {
-
     // Errors messages
-    private const MESSAGE_INVALID_ACCESS_TOKEN = 'invalid access token';
-    private const MESSAGE_BAD_BEARER_TOKEN = 'Bad bearer token';
-    private const MESSAGE_ACCESS_TOKEN_EXPIRED = 'access token expired';
+    public const MESSAGE_INVALID_ACCESS_TOKEN = 'invalid access token';
+    public const MESSAGE_BAD_BEARER_TOKEN = 'Bad bearer token';
+    public const MESSAGE_ACCESS_TOKEN_EXPIRED = 'access token expired';
 
 
 
-    private ?AccessTokenSchema $accessTokenSchema = null;
+    protected ?AccessTokenSchema $accessTokenSchema = null;
+
 
     /**
      * Проверяет, является ли токен недействительным.
@@ -69,9 +74,10 @@ abstract class AvitoBaseClient extends SdkClient
      */
     public function authorization( Account $account ): bool
     {
-        if ( $this->modules->cache )
+        /** @var AbstractCache $cache */
+        if ( $cache = $this->getModule(ClientInterface::CACHE) )
         {
-            $this->accessTokenSchema = $this->modules->cache->getData( $account );
+            $this->accessTokenSchema = $cache->getData( $account );
         }
 
         if ( !$this->accessTokenSchema )
@@ -83,9 +89,11 @@ abstract class AvitoBaseClient extends SdkClient
 
             $this->accessTokenSchema = $this->getAccessToken($accessTokenPrompt);
 
-            if ( $this->modules->cache )
+            if ( $this->accessTokenSchema instanceof AccessTokenSchema )
             {
-                $this->modules->cache->setData( $account, $this->accessTokenSchema );
+                $accessTokenSchema = serialize($this->accessTokenSchema);
+
+                $cache->setData( $account, $accessTokenSchema );
             }
         }
 
@@ -128,5 +136,30 @@ abstract class AvitoBaseClient extends SdkClient
         }
 
         return $schema;
+    }
+
+    /**
+     * @return string
+     *
+     * @throws Exception
+     */
+    public function getBearerToken(): string
+    {
+        if ( $this->accessTokenSchema === null )
+        {
+            if ( $account = $this->getConfig()->getAccount() )
+            {
+                if ( !$this->authorization($account) )
+                {
+                    $this->errorHandler([
+                        'message' => 'Authorization failed. Please check your client ID and secret.',
+                        'client_id' => $account->clientId,
+                        'client_secret' => $account->clientSecret,
+                    ]);
+                }
+            }
+        }
+
+        return $this->accessTokenSchema->access_token;
     }
 }

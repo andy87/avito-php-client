@@ -2,13 +2,15 @@
 
 namespace andy87\avito\client\schema\resumes;
 
-use app\components\api\avito\response\base\BaseResponse;
+use andy87\sdk\client\base\components\Schema;
 use andy87\avito\client\schema\resumes\contacts\Contact;
 
 /**
  * Контакты
+ *
+ * @package src/schema/resumes
  */
-class Contacts extends BaseResponse
+class Contacts extends Schema
 {
     public const ATTR_BOUGHT = 'already_bought';
     public const ATTR_CONTACTS = 'contacts';
@@ -23,6 +25,6 @@ class Contacts extends BaseResponse
     /** @var Contact[] Контакты */
     public array $contacts = [];
 
-    /** @var ?string Имя */
+    /** @var null|string Имя */
     public ?string $name = null;
 }

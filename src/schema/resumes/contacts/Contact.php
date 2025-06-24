@@ -2,17 +2,16 @@
 
 namespace andy87\avito\client\schema\resumes\contacts;
 
-use app\components\api\avito\response\base\BaseResponse;
+use andy87\sdk\client\base\components\Schema;
 
 /**
  * Контакт
-
  */
-class Contact extends BaseResponse
+class Contact extends Schema
 {
-    /** @var ?string Тип контакта */
+    /** @var null|string Тип контакта */
     public ?string $type = null;
 
-    /** @var ?string Значение контакта */
+    /** @var null|string Значение контакта */
     public ?string $value = null;
 }

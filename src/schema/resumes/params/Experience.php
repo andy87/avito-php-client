@@ -2,27 +2,27 @@
 
 namespace andy87\avito\client\schema\resumes\params;
 
-use app\components\api\avito\response\base\BaseResponse;
+use andy87\sdk\client\base\components\Schema;
 
 /**
  * Опыт работы в параметрах резюме
  *
  * @see Params::experience_list
  */
-class Experience extends BaseResponse
+class Experience  extends Schema
 {
-    /** @var ?string Компания */
+    /** @var null|string Компания */
     public ?string $company = null;
 
-    /** @var ?string Должность */
+    /** @var null|string Должность */
     public ?string $position = null;
 
-    /** @var ?string Обязанности */
+    /** @var null|string Обязанности */
     public ?string $responsibilities = null;
 
-    /** @var ?string Дата начала работы */
+    /** @var null|string Дата начала работы */
     public ?string $work_start = null;
 
-    /** @var ?string Дата окончания работы */
+    /** @var null|string Дата окончания работы */
     public ?string $work_finish = null;
 }

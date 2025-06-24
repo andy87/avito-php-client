@@ -22,6 +22,7 @@ class AccessTokenPrompt extends AvitoPrompt
     protected ?string $contentType = ContentType::X_WWW_FORM_URLENCODED;
 
 
+
     /**
      * @var string $clientId Avito API Client ID.
      */

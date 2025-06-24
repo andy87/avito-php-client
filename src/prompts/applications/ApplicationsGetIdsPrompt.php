@@ -2,6 +2,8 @@
 
 namespace andy87\avito\client\prompts\applications;
 
+use andy87\avito\client\ext\auth\AvitoAuthBearer;
+use andy87\avito\client\ext\auth\AvitoAuthEmployee;
 use andy87\avito\client\ext\AvitoPrompt;
 
 /**
@@ -17,7 +19,7 @@ use andy87\avito\client\ext\AvitoPrompt;
  */
 class ApplicationsGetIdsPrompt extends AvitoPrompt
 {
-    protected bool $isPrivate = true;
+    public const AUTH = [ AvitoAuthBearer::class, AvitoAuthEmployee::class ];
 
     protected string $path = '/applications/get_ids';
 
@@ -25,11 +27,11 @@ class ApplicationsGetIdsPrompt extends AvitoPrompt
     /**
      * Возвращать отклики с датой обновления от указанной даты
      *
-     * @var string <YYYY-MM-DD>
+     * @var null|string <YYYY-MM-DD>
      *
      * Example: updatedAtFrom=2006-01-02
      */
-    public string $updatedAtFrom;
+    public ?string $updatedAtFrom = null;
 
     /**
      * Идентификатор последнего отклика из предыдущего запроса
@@ -47,27 +49,27 @@ class ApplicationsGetIdsPrompt extends AvitoPrompt
      * Получение следующей страницы откликов:
      *      GET /job/v1/applications/get_ids?updatedAtFrom=2022-06-12&cursor=623850d1d3819d935dd02702
      *
-     * @var string
+     * @var null|string
      *
      * Example: cursor=623850d1d3819d935dd02702
      */
-    public string $cursor;
+    public ?string $cursor = null;
 
     /**
      * Идентификаторы вакансий. Опциональный фильтр (можно указать одно или несколько значений через запятую)
      *
-     * @var string
+     * @var null|string
      *
      * Example: vacancyIds=2241333,1424232
      */
-    public string $vacancyIds;
+    public ?string $vacancyIds = null;
 
     /**
      * Отклик просмотрен
      *
-     * @var string
+     * @var null|string
      *
      * Example: is_viewed=true
      */
-    public string $is_viewed;
+    public ?string $is_viewed = null;
 }

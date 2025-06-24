@@ -2,18 +2,18 @@
 
 namespace andy87\avito\client\schema\resumes\params;
 
-use app\components\api\avito\response\base\BaseResponse;
+use andy87\sdk\client\base\components\Schema;
 
 /**
  * Язык в параметрах резюме
  *
  * @see Params::language_list
  */
-class Language extends BaseResponse
+class Language extends Schema
 {
-    /** @var ?string Язык */
+    /** @var null|string Язык */
     public ?string $language = null;
 
-    /** @var ?string Уровень владения языком */
+    /** @var null|string Уровень владения языком */
     public ?string $language_level = null;
 }

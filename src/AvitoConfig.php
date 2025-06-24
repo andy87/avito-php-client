@@ -15,13 +15,12 @@ use andy87\sdk\client\base\interfaces\ClientInterface;
  */
 class AvitoConfig extends Config
 {
-    public string $port = Port::HTTPS;
-
+    public string $protocol = Port::HTTPS;
 
     public string $host = 'api.avito.ru';
 
-
     public ?string $prefix = '/job/v1';
+
 
 
     /** @var array $classes Контейнер для переназначения используемых классов*/

@@ -23,4 +23,26 @@ class ApplicationsWebhookPutPrompt extends ApplicationsWebhookGetPrompt
     public string $schema = ApplicationsWebhookPutSchema::class;
 
     protected string $method = Method::PUT;
+
+
+    /** @var string $url Webhook URL to filter by (optional). */
+    public string $url;
+
+    /** @var string $secret Webhook secret key to filter by (optional). */
+    public string $secret;
+
+
+
+    /**
+     * Initialize a new ApplicationsWebhookPrompt.
+     *
+     * @param string $url Webhook URL to query.
+     * @param string $secret Secret key of the webhook (if required).
+     */
+    public function __construct( string $url, string $secret = self::DEFAULT_SECRET )
+    {
+        $this->url = $url;
+
+        $this->secret = $secret;
+    }
 }

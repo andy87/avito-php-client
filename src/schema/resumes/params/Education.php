@@ -2,21 +2,22 @@
 
 namespace andy87\avito\client\schema\resumes\params;
 
-use app\components\api\avito\response\base\BaseResponse;
+
+use andy87\sdk\client\base\components\Schema;
 
 /**
  * Образование в параметрах резюме
  *
  * @see Params::education_list
  */
-class Education extends BaseResponse
+class Education extends Schema
 {
-    /** @var ?int Год окончания */
+    /** @var null|int Год окончания */
     public ?int $education_stop = null;
 
-    /** @var ?string Учебное заведение */
+    /** @var null|string Учебное заведение */
     public ?string $institution = null;
 
-    /** @var ?string Специальность */
+    /** @var null|string Специальность */
     public ?string $specialty = null;
 }

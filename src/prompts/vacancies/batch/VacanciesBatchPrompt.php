@@ -2,8 +2,11 @@
 
 namespace andy87\avito\client\prompts\vacancies\batch;
 
-use andy87\avito\client\ext\AvitoPrompt;
 use andy87\sdk\client\helpers\Method;
+use andy87\avito\client\ext\AvitoPrompt;
+use andy87\avito\client\ext\auth\AvitoAuthBearer;
+use andy87\sdk\client\base\interfaces\AuthorizationInterface;
+use andy87\avito\client\schema\vacancies\batch\VacanciesBatchSchema;
 
 /**
  * Просмотр данных вакансий
@@ -21,14 +24,21 @@ class VacanciesBatchPrompt extends AvitoPrompt
     /** @var bool Статус использования префикса конфига */
     public const USE_PREFIX = false;
 
-    /** @var bool Статус включения в заголовки параметра `X-Is-Employee` */
-    public const USE_X_EMPLOYEE = true;
+    /** @var AuthorizationInterface[] Список классов реализующих авторизацию. */
+    public const AUTH = [ AvitoAuthBearer::class ];
+
+
+    /** @var string Схема запроса, определяющая структуру и правила валидации. */
+    protected string $schema = VacanciesBatchSchema::class;
+
 
     /** @var string Метод запроса */
     public string $method = Method::POST;
 
     /** @var string Путь к API */
     public string $path = '/job/v2/vacancies/batch';
+
+
 
     /**
      * @var array|string[] Поля для основного тела ответа
@@ -59,4 +69,19 @@ class VacanciesBatchPrompt extends AvitoPrompt
      * "warehouse_functionality" "vehicle_type" "administrator_organization_type"
      */
     public array $params = [];
+
+
+    /**
+     * Конструктор класса VacanciesBatchPrompt.
+     *
+     * @param array $ids Идентификаторы вакансий на сайте (до 100).
+     * @param array $fields Поля для основного тела ответа.
+     * @param array $params Дополнительные поля, которые входят в params.
+     */
+    public function __construct( array $ids, array $fields = [], array $params = [] )
+    {
+        $this->ids = $ids;
+        $this->fields = $fields;
+        $this->params = $params;
+    }
 }

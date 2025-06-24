@@ -11,12 +11,12 @@ namespace andy87\avito\client\schema\applications;
  */
 class Applies
 {
-    /** @var ?string Дата создания */
+    /** @var null|string Дата создания */
     public ?string $created_at = null;
 
-    /** @var ?string Идентификатор */
+    /** @var null|string Идентификатор */
     public ?string $id = null;
 
-    /** @var ?string Дата обновления */
+    /** @var null|string Дата обновления */
     public ?string $updated_at = null;
 }

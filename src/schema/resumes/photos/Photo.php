@@ -2,13 +2,13 @@
 
 namespace andy87\avito\client\schema\resumes\photos;
 
-use app\components\api\avito\response\base\BaseResponse;
+use andy87\sdk\client\base\components\Schema;
 
 /**
  * Фото в резюме
  */
-class Photo extends BaseResponse
+class Photo extends Schema
 {
-    /** @var ?string URL фото */
+    /** @var null|string URL фото */
     public ?string $url = null;
 }

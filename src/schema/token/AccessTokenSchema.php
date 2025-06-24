@@ -23,7 +23,7 @@ class AccessTokenSchema extends Schema
     public string $access_token;
 
     /**
-     * @var ?int $expires_in
+     * @var null|int $expires_in
      *
      * Example: 86400
      */
