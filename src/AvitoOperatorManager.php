@@ -27,7 +27,7 @@ class AvitoOperatorManager
      * Список операторов, доступных в менеджере.
      * Ключ - имя оператора, значение - класс оператора.
      *
-     * @var array
+     * @var array<string, class-string<BaseAvitoOperator>>
      */
     private const MAP = [
         'authOperator' => AuthOperator::class,
@@ -61,13 +61,13 @@ class AvitoOperatorManager
     /**
      * Магический метод для получения экземпляра оператора по его имени.
      *
-     * @param string $name Имя оператора.
+     * @param mixed $name Имя оператора.
      *
      * @return BaseAvitoOperator Экземпляр оператора.
      *
      * @throws Exception
      */
-    public function __get(string $name)
+    public function __get( mixed $name)
     {
         if (array_key_exists($name, self::MAP))
         {
@@ -89,7 +89,6 @@ class AvitoOperatorManager
 
             return $this->instances[$className];
         }
-
         throw new Exception("Operator '$name' not registered in AvitoOperatorManager.");
     }
 }

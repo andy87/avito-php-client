@@ -31,13 +31,14 @@ abstract class AvitoBaseClient extends SdkClient
     protected ?AccessTokenSchema $accessTokenSchema = null;
 
 
-
     /**
      * Проверяет, является ли токен недействительным.
      *
      * @param Response $response Ответ от API, содержащий информацию о токене.
      *
      * @return bool Возвращает true, если токен недействителен, иначе false.
+     *
+     * @throws Exception
      */
     public function isTokenInvalid( Response $response ): bool
     {
