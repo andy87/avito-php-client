@@ -42,7 +42,7 @@ class AvitoClient extends AvitoBaseClient
      *
      * @throws Exception
      */
-    function getAccessToken(): ?AccessTokenSchema
+    public function getAccessToken(): ?AccessTokenSchema
     {
         return $this->operatorManager->authOperator->getAccessToken();
     }

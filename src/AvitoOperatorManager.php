@@ -4,75 +4,92 @@ namespace andy87\avito\client;
 
 use Exception;
 use andy87\avito\client\ext\AvitoBaseClient;
+use andy87\avito\client\operators\BaseAvitoOperator;
 use andy87\avito\client\operators\JobOperator;
 use andy87\avito\client\operators\AuthOperator;
 use andy87\avito\client\operators\AutoloadOperator;
 use andy87\avito\client\operators\AccountsHierarchyOperator;
 
 /**
- * Динамический менеджер сервисов Avito
+ * Явный менеджер операторов Avito.
+ * Убирает магические методы. Операторы доступны через get-методы.
  *
- * @property AccountsHierarchyOperator $accountsHierarchyOperator
- * @property AuthOperator $authOperator
- * @property AutoloadOperator $autoloadOperator
- * @property JobOperator $jobOperator
+ * @property-read AuthOperator $authOperator
+ * @property-read JobOperator $jobOperator
+ * @property-read AutoloadOperator $autoloadOperator
+ * @property-read AccountsHierarchyOperator $accountsHierarchyOperator
  *
  * @package src
  */
 class AvitoOperatorManager
 {
-    protected CONST MAP = [
-        'accountsHierarchyOperator' => AccountsHierarchyOperator::class,
+    /**
+     * Список операторов, доступных в менеджере.
+     * Ключ - имя оператора, значение - класс оператора.
+     *
+     * @var array
+     */
+    private const MAP = [
         'authOperator' => AuthOperator::class,
-        'autoloadOperator' => AutoloadOperator::class,
         'jobOperator' => JobOperator::class,
+        'autoloadOperator' => AutoloadOperator::class,
+        'accountsHierarchyOperator' => AccountsHierarchyOperator::class,
     ];
 
 
-    /** @var AvitoBaseClient $client Клиент Avito используемый для запросов к API */
+
+    /** @var AvitoBaseClient $client Клиент Avito, который используется для выполнения запросов. */
     private AvitoBaseClient $client;
 
-    /** @var array $instances Массив для хранения экземпляров сервисов */
+    /** @var array $instances Массив для хранения экземпляров операторов. */
     private array $instances = [];
 
 
-
     /**
-     * Конструктор класса AvitoServiceManager
+     * Конструктор класса AvitoOperatorManager.
      *
-     * @param AvitoBaseClient $client
+     * @param AvitoBaseClient $client Клиент Avito, который используется для выполнения запросов.
+     *
+     * @throws Exception
      */
-    public function __construct( AvitoBaseClient $client )
+    public function __construct(AvitoBaseClient $client)
     {
         $this->client = $client;
     }
 
 
-
     /**
-     * Магический метод для динамического вызова сервисов Avito
+     * Магический метод для получения экземпляра оператора по его имени.
      *
-     * @param string $name
-     * @param array $arguments
+     * @param string $name Имя оператора.
      *
-     * @return mixed
+     * @return BaseAvitoOperator Экземпляр оператора.
      *
      * @throws Exception
      */
-    public function __call( string $name, array $arguments )
+    public function __get(string $name)
     {
-        if ( !isset( $this->instances[$name] ) )
+        if (array_key_exists($name, self::MAP))
         {
-            if ( !isset( self::MAP[$name] ) )
+            $className = self::MAP[$name];
+
+            if (!isset($this->instances[$className]))
             {
-                throw new Exception( "Service '$name' not found." );
+                $instance = new $className($this->client);
+
+                if ($instance instanceof BaseAvitoOperator)
+                {
+                    $this->instances[$className] = $instance;
+
+                } else {
+
+                    throw new Exception("$className must extend BaseAvitoOperator.");
+                }
             }
 
-            $serviceClass = self::MAP[$name];
-
-            $this->instances[$name] = new $serviceClass( $this->client );
+            return $this->instances[$className];
         }
 
-        return $this->instances[$name];
+        throw new Exception("Operator '$name' not registered in AvitoOperatorManager.");
     }
 }

@@ -46,7 +46,7 @@ abstract class AvitoBaseClient extends SdkClient
 
         if (is_array($result))
         {
-            $message = $resp['result']['message'] ?? null;
+            $message = $result['result']['message'] ?? null;
 
             return match ($message)
             {
@@ -55,6 +55,12 @@ abstract class AvitoBaseClient extends SdkClient
                 self::MESSAGE_BAD_BEARER_TOKEN => true,
                 default => false,
             };
+        } else {
+            $this->errorHandler([
+                'method' => __METHOD__,
+                'message' => 'Response result is not an array.',
+                'response' => $response,
+            ]);
         }
 
         return false;
@@ -154,6 +160,5 @@ abstract class AvitoBaseClient extends SdkClient
      *
      * @throws Exception
      */
-    abstract function getAccessToken(): ?AccessTokenSchema;
-
+    abstract public function getAccessToken(): ?AccessTokenSchema;
 }
