@@ -11,9 +11,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookGet
  */
-class ApplicationsWebhookSchema extends Schema
+class ApplicationsWebhookDeleteSchema extends Schema
 {
-    public string $secret;
-
-    public string $url;
+    public bool $ok;
 }

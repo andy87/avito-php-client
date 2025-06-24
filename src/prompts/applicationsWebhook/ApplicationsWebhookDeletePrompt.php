@@ -2,9 +2,8 @@
 
 namespace andy87\avito\client\prompts\applicationsWebhook;
 
-use andy87\avito\client\ext\AvitoPrompt;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookSchema;
 use andy87\sdk\client\helpers\Method;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookDeleteSchema;
 
 /**
  * Параметры запроса.
@@ -18,5 +17,7 @@ use andy87\sdk\client\helpers\Method;
  */
 class ApplicationsWebhookDeletePrompt extends ApplicationsWebhookPrompt
 {
+    public string $schema = ApplicationsWebhookDeleteSchema::class;
+
     protected string $method = Method::DELETE;
 }

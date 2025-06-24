@@ -3,6 +3,7 @@
 namespace andy87\avito\client\prompts\applicationsWebhook;
 
 use andy87\avito\client\ext\AvitoPrompt;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookPutSchema;
 use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookSchema;
 use andy87\sdk\client\helpers\Method;
 
@@ -21,5 +22,7 @@ use andy87\sdk\client\helpers\Method;
  */
 class ApplicationsWebhookPutPrompt extends ApplicationsWebhookPrompt
 {
+    public string $schema = ApplicationsWebhookPutSchema::class;
+
     protected string $method = Method::PUT;
 }

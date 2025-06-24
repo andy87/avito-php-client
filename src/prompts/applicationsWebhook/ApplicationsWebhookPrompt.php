@@ -20,6 +20,8 @@ class ApplicationsWebhookPrompt extends AvitoPrompt
     /** @var string Значение по умолчанию для секретного ключа вебхука. */
     public const DEFAULT_SECRET = 'secret';
 
+    protected string $path = 'applications/webhook';
+
 
     /** @var string $schema JSON Schema для валидации запроса. */
     public string $schema = ApplicationsWebhookSchema::class;
