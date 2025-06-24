@@ -2,10 +2,8 @@
 
 namespace andy87\avito\client\prompts\applicationsWebhook;
 
-use andy87\avito\client\ext\AvitoPrompt;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookPutSchema;
-use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookSchema;
 use andy87\sdk\client\helpers\Method;
+use andy87\avito\client\schema\applicationsWebhook\ApplicationsWebhookPutSchema;
 
 /**
  * Параметры запроса.
@@ -20,7 +18,7 @@ use andy87\sdk\client\helpers\Method;
  *
  * @package src/prompt/applicationsWebhook
  */
-class ApplicationsWebhookPutPrompt extends ApplicationsWebhookPrompt
+class ApplicationsWebhookPutPrompt extends ApplicationsWebhookGetPrompt
 {
     public string $schema = ApplicationsWebhookPutSchema::class;
 
