@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\prompts\auth;
 
-use andy87\avito\client\helpers\GrantType;
+use andy87\avito\client\utils\GrantType;
 
 /**
  * Обновление access token

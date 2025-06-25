@@ -16,9 +16,9 @@ try
 
     $avitoService = new AvitoService($account);
 
-    $avitoService->getOperator()->authOperator>getAccessToken();
-    $avitoService->getOperator()->authOperator>getAccessTokenAuthorizationCode('code');
-    $avitoService->getOperator()->authOperator>refreshAccessTokenAuthorizationCode('refresh_token');
+    $avitoService->getOperator()->authOperator->getAccessToken();
+    $avitoService->getOperator()->authOperator->getAccessTokenAuthorizationCode('code');
+    $avitoService->getOperator()->authOperator->refreshAccessTokenAuthorizationCode('refresh_token');
 
     $avitoService->getOperator()->jobOperator->applicationsWebhookGet();
     $avitoService->getOperator()->jobOperator->applicationsGetIds();

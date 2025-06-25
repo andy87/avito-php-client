@@ -2,6 +2,7 @@
 
 namespace andy87\avito\client\schema\auth;
 
+use andy87\sdk\client\base\components\Prompt;
 use andy87\sdk\client\base\components\Schema;
 
 /**
@@ -51,4 +52,14 @@ final class AccessTokenSchema extends Schema
      * Example: "Bearer"
      */
     public string $token_type;
+
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function validate( Prompt $prompt ): bool
+    {
+        return !empty($this->access_token);
+    }
 }

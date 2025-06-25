@@ -4,6 +4,7 @@ namespace andy87\avito\client\ext;
 
 use Exception;
 use andy87\avito\client\AvitoConfig;
+use andy87\avito\client\utils\Invalid;
 use andy87\avito\client\schema\auth\AccessTokenSchema;
 use andy87\sdk\client\SdkClient;
 use andy87\sdk\client\core\transport\Response;
@@ -21,14 +22,11 @@ use andy87\sdk\client\base\interfaces\ClientInterface;
  */
 abstract class AvitoBaseClient extends SdkClient
 {
-    // Errors messages
-    public const MESSAGE_INVALID_ACCESS_TOKEN = 'invalid access token';
-    public const MESSAGE_BAD_BEARER_TOKEN = 'Bad bearer token';
-    public const MESSAGE_ACCESS_TOKEN_EXPIRED = 'access token expired';
-
-
-
+    /**
+     * @var null|AccessTokenSchema Кэшированная схема токена доступа.
+     */
     protected ?AccessTokenSchema $accessTokenSchema = null;
+
 
 
     /**
@@ -45,17 +43,20 @@ abstract class AvitoBaseClient extends SdkClient
         // чуть позже появятся условия для проверки токена
         $result = $response->getResult();
 
-        if (is_array($result))
+        $status = $result['result']['status'] ?? null;
+
+        if (is_array($result) && $status === false )
         {
             $message = $result['result']['message'] ?? null;
 
             return match ($message)
             {
-                self::MESSAGE_INVALID_ACCESS_TOKEN,
-                self::MESSAGE_ACCESS_TOKEN_EXPIRED,
-                self::MESSAGE_BAD_BEARER_TOKEN => true,
+                Invalid::MESSAGE_INVALID_ACCESS_TOKEN,
+                Invalid::MESSAGE_ACCESS_TOKEN_EXPIRED,
+                Invalid::MESSAGE_BAD_BEARER_TOKEN => true,
                 default => false,
             };
+
         } else {
             $this->errorHandler([
                 'method' => __METHOD__,
@@ -71,23 +72,28 @@ abstract class AvitoBaseClient extends SdkClient
      * Авторизация для получения токена доступа к Avito API.
      *
      * @param Account $account
+     * @param bool $useCache
      *
      * @return bool
      *
      * @throws Exception
      */
-    public function authorization( Account $account ): bool
+    public function authorization( Account $account, bool $useCache = true ): bool
     {
-        if ( $cache = $this->getModule( ClientInterface::CACHE ) )
+        $this->accessTokenSchema = null;
+
+        $cache = $this->getModule( ClientInterface::CACHE );
+
+        if ( $useCache && $cache )
         {
-            $this->accessTokenSchema = $cache->getData( $account );
+            $this->accessTokenSchema = $cache->getCacheAccessTokenSchema( $account );
         }
 
         if ( !$this->accessTokenSchema )
         {
             if ( $this->accessTokenSchema = $this->getAccessToken() )
             {
-                $cache?->setData($account, $this->accessTokenSchema);
+                if ( $useCache && $cache ) $cache->setData( $account, $this->accessTokenSchema );
             }
         }
 

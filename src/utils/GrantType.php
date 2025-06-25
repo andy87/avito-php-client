@@ -1,6 +1,6 @@
 <?php
 
-namespace andy87\avito\client\helpers;
+namespace andy87\avito\client\utils;
 
 /**
  * Класс GrantType

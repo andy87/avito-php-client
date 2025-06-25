@@ -2,11 +2,11 @@
 
 namespace andy87\avito\client\prompts\auth;
 
-use andy87\avito\client\ext\AvitoPrompt;
-use andy87\avito\client\helpers\GrantType;
-use andy87\sdk\client\helpers\ContentType;
-use andy87\avito\client\schema\auth\AccessTokenSchema;
 use andy87\sdk\client\helpers\Method;
+use andy87\sdk\client\helpers\ContentType;
+use andy87\avito\client\ext\AvitoPrompt;
+use andy87\avito\client\utils\GrantType;
+use andy87\avito\client\schema\auth\AccessTokenSchema;
 
 /**
  * Получение access token
@@ -18,6 +18,8 @@ use andy87\sdk\client\helpers\Method;
  */
 class AccessTokenPrompt extends AvitoPrompt
 {
+    public const DEBUG = true;
+    
     protected string $schema = AccessTokenSchema::class;
     protected string $path = 'token';
 
@@ -53,7 +55,7 @@ class AccessTokenPrompt extends AvitoPrompt
      * @param string $clientId Avito API Client ID.
      * @param string $clientSecret Avito API Client Secret.
      */
-    public function __construct(string $clientId, string $clientSecret )
+    public function __construct( string $clientId, string $clientSecret )
     {
         $this->clientId = $clientId;
 

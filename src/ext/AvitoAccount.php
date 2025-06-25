@@ -10,6 +10,10 @@ use andy87\sdk\client\base\components\Account;
  *
  * Содержет данные для аутентификации и авторизации.
  *
+ * @url https://developers.avito.ru/applications
+ *
+ * @documentation https://developers.avito.ru/api-catalog/job/documentation#ApiDocumentationBlock
+ * 
  * @package src\ext
  */
 class AvitoAccount extends Account

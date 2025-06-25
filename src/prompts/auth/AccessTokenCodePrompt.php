@@ -3,7 +3,7 @@
 namespace andy87\avito\client\prompts\auth;
 
 use andy87\avito\client\AvitoClient;
-use andy87\avito\client\helpers\GrantType;
+use andy87\avito\client\utils\GrantType;
 
 /**
  * Получение access token
