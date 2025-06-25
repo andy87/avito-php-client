@@ -58,8 +58,7 @@ abstract class AvitoBaseClient extends SdkClient
             };
 
         } else {
-            $this->errorHandler([
-                'method' => __METHOD__,
+            $this->errorHandler(__METHOD__, __LINE__, [
                 'message' => 'Response result is not an array.',
                 'response' => $response,
             ]);
@@ -72,19 +71,19 @@ abstract class AvitoBaseClient extends SdkClient
      * Авторизация для получения токена доступа к Avito API.
      *
      * @param Account $account
-     * @param bool $isGetFromCache
+     * @param bool $useCache
      *
      * @return bool
      *
      * @throws Exception
      */
-    public function authorization( Account $account, bool $isGetFromCache = true ): bool
+    public function authorization( Account $account, bool $useCache = true ): bool
     {
         $this->accessTokenSchema = null;
 
         $cache = $this->getModule( ClientInterface::CACHE );
 
-        if ( $isGetFromCache && $cache )
+        if ( $useCache && $cache )
         {
             $this->accessTokenSchema = $cache->getCacheAccessTokenSchema( $account );
         }
@@ -93,17 +92,13 @@ abstract class AvitoBaseClient extends SdkClient
         {
             if ( $this->accessTokenSchema = $this->getAccessToken() )
             {
-                if ( $cache )
-                {
-                    $cache->setData( $account, serialize( $this->accessTokenSchema ) );
-                }
+                $cache?->setData( $account, serialize( $this->accessTokenSchema ) );
             }
         }
 
         if ( !$this->accessTokenSchema )
         {
-            $this->errorHandler([
-                'method' => __METHOD__,
+            $this->errorHandler(__METHOD__, __LINE__, [
                 'message' => 'Access token schema is null.',
                 'func_get_args' => func_get_args(),
             ]);
@@ -113,28 +108,78 @@ abstract class AvitoBaseClient extends SdkClient
     }
 
     /**
-     * @return string
+     * @throws Exception
+     */
+    public function reAuthorization( Account $account ): bool
+    {
+        $result = $this->authorization( $account, false );
+
+        if ( $result )
+        {
+            if ( $cache = $this->getModule( ClientInterface::CACHE ) )
+            {
+                $cache->setData( $account, serialize( $this->accessTokenSchema ) );
+            }
+
+        } else {
+
+            $this->errorHandler(__METHOD__, __LINE__, [
+                'method' => __METHOD__,
+                'message' => 'Re-authorization failed.',
+                'account' => $account,
+            ]);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return ?string
      *
      * @throws Exception
      */
-    public function getBearerToken(): string
+    public function getBearerToken(): ?string
     {
-        if ( !$this->accessTokenSchema )
+        $accessTokenSchema = $this->getAccessTokenSchema();
+
+        if ( !$accessTokenSchema )
         {
-            if ($account = $this->getConfig()->getAccount())
-            {
-                if ( !$this->authorization($account) )
-                {
-                    $this->errorHandler([
-                        'message' => 'Authorization failed. Please check your client ID and secret.',
-                        'client_id' => $account->client_id,
-                        'client_secret' => $account->client_secret,
-                    ]);
-                }
-            }
+            $this->errorHandler(__METHOD__, __LINE__, [
+                __METHOD__ . ':' . __LINE__ => [
+                    'error' => 'Access token schema is null',
+                    'accessTokenSchema' => $accessTokenSchema,
+                ]
+            ]);
+
+            return null;
         }
 
-        return $this->accessTokenSchema->access_token;
+        return $accessTokenSchema->access_token;
+    }
+
+
+    /**
+     * Получение AccessTokenSchema.
+     *
+     * @return null|AccessTokenSchema
+     *
+     * @throws Exception
+     */
+    public function getAccessTokenSchema(): ?AccessTokenSchema
+    {
+        $accessTokenSchema = $this->accessTokenSchema;
+
+        if (!$accessTokenSchema)
+        {
+            $accessTokenSchema = $this->getCacheAccessTokenSchema();
+        }
+
+        if (!$accessTokenSchema)
+        {
+            $accessTokenSchema = $this->getAccessToken();
+        }
+
+        return $accessTokenSchema;
     }
 
     /**
@@ -157,16 +202,6 @@ abstract class AvitoBaseClient extends SdkClient
 
         return $accessTokenSchema;
     }
-    
-    /**
-     * Получение AccessTokenSchema.
-     *
-     * @return null|AccessTokenSchema
-     */
-    public function getAccessTokenSchema(): ?AccessTokenSchema
-    {
-        return $this->accessTokenSchema;
-    }
 
     /**
      * Получение AccessTokenSchema.
@@ -176,5 +211,4 @@ abstract class AvitoBaseClient extends SdkClient
      * @throws Exception
      */
     abstract public function getAccessToken(): ?AccessTokenSchema;
-    
 }
