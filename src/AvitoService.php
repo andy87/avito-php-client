@@ -127,13 +127,13 @@ class AvitoService
     }
 
     /**
-     * @param array $data
+     * @param mixed $data
      *
      * @return null|bool
      *
      * @throws Exception
      */
-    public function cacheSet( array $data ): ?bool
+    public function cacheSet( mixed $data ): ?bool
     {
         $account = $this->client->config->getAccount();
 
