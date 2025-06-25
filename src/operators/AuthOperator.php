@@ -3,11 +3,9 @@
 namespace andy87\avito\client\operators;
 
 use Exception;
-use andy87\avito\client\ext\AvitoAccount;
+use andy87\avito\client\schema\dto\Warning;
 use andy87\avito\client\schema\auth\AccessTokenSchema;
-use andy87\avito\client\prompts\auth\AccessTokenPrompt;
-use andy87\avito\client\prompts\auth\AccessTokenCodePrompt;
-use andy87\avito\client\prompts\auth\AccessTokenRefreshPrompt;
+use andy87\avito\client\prompts\auth\{ AccessTokenPrompt, AccessTokenCodePrompt, AccessTokenRefreshPrompt };
 
 /**
  * Авторизация

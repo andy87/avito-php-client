@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\prompts\job\applicationsWebhook;
 
-use andy87\sdk\client\helpers\Method;
+use andy87\sdk\client\helpers\MethodRegistry;
 use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookDeleteSchema;
 
 /**

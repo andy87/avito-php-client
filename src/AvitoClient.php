@@ -2,14 +2,11 @@
 
 namespace andy87\avito\client;
 
-use andy87\avito\client\ext\AvitoSchema;
-use andy87\sdk\client\base\components\Schema;
-use andy87\sdk\client\base\interfaces\RequestInterface;
-use andy87\sdk\client\core\transport\Request;
-use andy87\sdk\client\core\transport\Response;
 use Exception;
-use andy87\avito\client\ext\AvitoBaseClient;
+use andy87\sdk\client\core\transport\Response;
+use andy87\sdk\client\base\interfaces\RequestInterface;
 use andy87\avito\client\schema\auth\AccessTokenSchema;
+use andy87\avito\client\ext\{ AvitoSchema, AvitoBaseClient };
 
 /**
  * Клиент для использования API Авито.

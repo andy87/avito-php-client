@@ -2,6 +2,7 @@
 
 namespace andy87\avito\client\operators;
 
+use andy87\avito\client\schema\dto\Warning;
 use Exception;
 use andy87\avito\client\prompts\job\resume\ResumeGetItemPrompt;
 use andy87\avito\client\prompts\job\resume\ResumeGetContactsPrompt;

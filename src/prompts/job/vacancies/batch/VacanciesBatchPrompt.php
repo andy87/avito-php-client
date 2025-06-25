@@ -3,7 +3,7 @@
 namespace andy87\avito\client\prompts\job\vacancies\batch;
 
 use andy87\avito\client\schema\job\vacancies\batch\VacanciesBatchSchema;
-use andy87\sdk\client\helpers\Method;
+use andy87\sdk\client\helpers\MethodRegistry;
 use andy87\sdk\client\base\interfaces\AuthorizationInterface;
 use andy87\avito\client\ext\AvitoPrompt;
 use andy87\avito\client\ext\auth\AvitoAuthBearer;

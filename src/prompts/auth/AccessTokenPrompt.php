@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\prompts\auth;
 
-use andy87\sdk\client\helpers\Method;
+use andy87\sdk\client\helpers\MethodRegistry;
 use andy87\sdk\client\helpers\ContentType;
 use andy87\avito\client\ext\AvitoPrompt;
 use andy87\avito\client\utils\GrantType;
