@@ -18,8 +18,6 @@ use andy87\avito\client\schema\auth\AccessTokenSchema;
  */
 class AccessTokenPrompt extends AvitoPrompt
 {
-    public const DEBUG = true;
-    
     protected string $schema = AccessTokenSchema::class;
     protected string $path = 'token';
 
