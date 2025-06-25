@@ -30,4 +30,6 @@ abstract class ApplicationsWebhookPrompt extends AvitoPrompt
     protected string $schema = ApplicationsWebhookGetSchema::class;
 
     protected string $path = 'job/v1/applications/webhook';
+
+    protected ?string $contentType = null;
 }
