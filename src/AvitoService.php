@@ -66,7 +66,7 @@ class AvitoService
 
         $config = new $configClass( $avitoAccount );
 
-        if ( $config instanceof AvitoConfig::class ) return $config;
+        if ( $config instanceof AvitoConfig ) return $config;
 
         throw new Exception( "Класс $configClass должен быть подклассом AvitoConfig" );
     }
@@ -86,7 +86,7 @@ class AvitoService
 
         $client = new $clientClass( $config );
 
-        if ( $client instanceof AvitoClient::class ) return $client;
+        if ( $client instanceof AvitoClient ) return $client;
 
         throw new Exception( "Класс $clientClass должен быть подклассом AvitoClient" );
     }
