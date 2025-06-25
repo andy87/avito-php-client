@@ -13,7 +13,7 @@ use andy87\sdk\client\base\components\Config;
  *
  * @package src
  */
-final class AvitoConfig extends Config
+class AvitoConfig extends Config
 {
     public string $protocol = Port::HTTPS;
 
