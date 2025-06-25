@@ -26,7 +26,7 @@ final class ResumeGetContactsPrompt extends AvitoPrompt
     public string $schema = ResumeGetContactsSchema::class;
 
     /** @var string Путь запроса к API. */
-    protected string $path = 'resumes/%d/contacts/';
+    protected string $path = '/job/v1/resumes/%d/contacts/';
 
 
     /**

@@ -1,0 +1,6 @@
+{
+  "result": {
+    "status": false,
+    "message": "Bad bearer token"
+  }
+}

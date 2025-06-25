@@ -2,9 +2,8 @@
 
 namespace andy87\avito\client\ext;
 
-use andy87\sdk\client\helpers\Method;
 use andy87\sdk\client\base\components\Prompt;
-use andy87\sdk\client\helpers\ContentType;
+use andy87\sdk\client\helpers\{ Method, ContentType };
 
 /**
  * Prompt с доработками для Avito.

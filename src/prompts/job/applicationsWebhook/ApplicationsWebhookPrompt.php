@@ -2,10 +2,10 @@
 
 namespace andy87\avito\client\prompts\job\applicationsWebhook;
 
-use andy87\avito\client\ext\auth\AvitoAuthBearer;
 use andy87\avito\client\ext\AvitoPrompt;
-use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookGetSchema;
+use andy87\avito\client\ext\auth\AvitoAuthBearer;
 use andy87\sdk\client\base\interfaces\AuthorizationInterface;
+use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookGetSchema;
 
 /**
  * Параметры запроса.
@@ -27,7 +27,7 @@ abstract class ApplicationsWebhookPrompt extends AvitoPrompt
 
 
     /** @var string Схема запроса, определяющая структуру и правила валидации. */
-    public string $schema = ApplicationsWebhookGetSchema::class;
+    protected string $schema = ApplicationsWebhookGetSchema::class;
 
-    protected string $path = 'applications/webhook';
+    protected string $path = 'job/v1/applications/webhook';
 }

@@ -21,7 +21,7 @@ final class ApplicationsGetIdsPrompt extends AvitoPrompt
 {
     public const AUTH = [ AvitoAuthBearer::class, AvitoAuthEmployee::class ];
 
-    protected string $path = '/applications/get_ids';
+    protected string $path = '/job/v1/applications/get_ids';
 
 
     /**

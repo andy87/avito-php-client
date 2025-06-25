@@ -32,6 +32,8 @@ final class JobOperator extends BaseAvitoOperator
      * Получение информации о подписках (webhook)
      * Получение информации по существующим подпискам на создание и обновление откликов
      *
+     * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookGet
+     *
      * @return null|ApplicationsWebhookGetSchema
      *
      * @throws Exception
@@ -53,6 +55,8 @@ final class JobOperator extends BaseAvitoOperator
      * изменение сотрудника относящегося к объявлению (employee_id)
      * Важно: проверьте доступность url, при его недоступности из контура Авито webhook не будет создан/перезаписан.
      *
+     * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookPut
+     *
      * @param string $url
      * @param string $secret
      *
@@ -73,6 +77,8 @@ final class JobOperator extends BaseAvitoOperator
     /**
      * Отключение уведомлений по откликам (webhook)
      * Отписка от уведомлений о создании и обновлении откликов на вакансии
+     *
+     * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookGet
      *
      * @param string $url
      *
@@ -98,6 +104,8 @@ final class JobOperator extends BaseAvitoOperator
      *
      * По умолчанию fields и params выводятся все.
      * Если указана только часть полей - остальные поля будут отсутствовать в ответе.
+     *
+     * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/resumeGetContacts
      *
      * @param int $resume_id
      * @param null|string $fields

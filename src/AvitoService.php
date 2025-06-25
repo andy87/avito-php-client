@@ -60,7 +60,7 @@ class AvitoService
      *
      * @throws Exception
      */
-    protected function constructConfig(AvitoAccount $avitoAccount): AvitoConfig
+    protected function constructConfig( AvitoAccount $avitoAccount ): AvitoConfig
     {
         $configClass = static::CLASS_CONFIG;
 
@@ -136,6 +136,8 @@ class AvitoService
     {
         $account = $this->client->getConfig()->getAccount();
 
+        $data = serialize($data);
+
         return $this->getModule(ClientInterface::CACHE)?->setData( $account, $data );
     }
 
@@ -148,6 +150,6 @@ class AvitoService
     {
         $account = $this->client->getConfig()->getAccount();
 
-        return  $this->getModule(ClientInterface::CACHE)?->getData( $account );
+        return $this->getModule(ClientInterface::CACHE)?->getData( $account );
     }
 }
