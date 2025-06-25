@@ -3,6 +3,7 @@
 namespace andy87\avito\client\schema\job\resumes;
 
 use andy87\avito\client\ext\AvitoSchema;
+use andy87\avito\client\schema\dto\Result;
 use andy87\avito\client\schema\job\resumes\photos\Photo;
 
 /**
@@ -18,6 +19,7 @@ final class ResumeGetItemSchema extends AvitoSchema
     protected const MAPPING = [
         'params' => Params::class,
         'photos' => [Photo::class],
+        'result' => Result::class,
     ];
 
     /** @var null|string Описание */

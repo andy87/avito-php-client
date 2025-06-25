@@ -15,7 +15,7 @@ use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookDelete
  *
  * @package src/prompt/job/applicationsWebhook
  */
-class ApplicationsWebhookDeletePrompt extends ApplicationsWebhookPrompt
+final class ApplicationsWebhookDeletePrompt extends ApplicationsWebhookPrompt
 {
     public string $schema = ApplicationsWebhookDeleteSchema::class;
 

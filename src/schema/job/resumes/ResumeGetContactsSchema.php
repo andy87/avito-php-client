@@ -3,6 +3,7 @@
 namespace andy87\avito\client\schema\job\resumes;
 
 use andy87\avito\client\ext\AvitoSchema;
+use andy87\avito\client\schema\dto\Result;
 use andy87\avito\client\schema\job\resumes\contacts\Contact;
 
 /**
@@ -19,6 +20,7 @@ final class ResumeGetContactsSchema extends AvitoSchema
     protected const MAPPING = [
         'contacts' => [Contact::class],
         'full_name' => FullName::class,
+        'result' => Result::class,
     ];
 
     /** @var bool Признак того, что контакты уже куплены */

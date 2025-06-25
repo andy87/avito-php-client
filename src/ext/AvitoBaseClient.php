@@ -72,19 +72,19 @@ abstract class AvitoBaseClient extends SdkClient
      * Авторизация для получения токена доступа к Avito API.
      *
      * @param Account $account
-     * @param bool $useCache
+     * @param bool $isGetFromCache
      *
      * @return bool
      *
      * @throws Exception
      */
-    public function authorization( Account $account, bool $useCache = true ): bool
+    public function authorization( Account $account, bool $isGetFromCache = true ): bool
     {
         $this->accessTokenSchema = null;
 
         $cache = $this->getModule( ClientInterface::CACHE );
 
-        if ( $useCache && $cache )
+        if ( $isGetFromCache && $cache )
         {
             $this->accessTokenSchema = $cache->getCacheAccessTokenSchema( $account );
         }
@@ -93,7 +93,10 @@ abstract class AvitoBaseClient extends SdkClient
         {
             if ( $this->accessTokenSchema = $this->getAccessToken() )
             {
-                if ( $useCache && $cache ) $cache->setData( $account, $this->accessTokenSchema );
+                if ( $cache )
+                {
+                    $cache->setData( $account, serialize( $this->accessTokenSchema ) );
+                }
             }
         }
 
@@ -116,22 +119,17 @@ abstract class AvitoBaseClient extends SdkClient
      */
     public function getBearerToken(): string
     {
-        if ( $this->accessTokenSchema === null )
+        if ( !$this->accessTokenSchema )
         {
-            $this->accessTokenSchema = $this->getCacheAccessTokenSchema();
-
-            if ( !$this->accessTokenSchema )
+            if ($account = $this->getConfig()->getAccount())
             {
-                if ($account = $this->getConfig()->getAccount())
+                if ( !$this->authorization($account) )
                 {
-                    if ( !$this->authorization($account) )
-                    {
-                        $this->errorHandler([
-                            'message' => 'Authorization failed. Please check your client ID and secret.',
-                            'client_id' => $account->client_id,
-                            'client_secret' => $account->client_secret,
-                        ]);
-                    }
+                    $this->errorHandler([
+                        'message' => 'Authorization failed. Please check your client ID and secret.',
+                        'client_id' => $account->client_id,
+                        'client_secret' => $account->client_secret,
+                    ]);
                 }
             }
         }
@@ -159,6 +157,16 @@ abstract class AvitoBaseClient extends SdkClient
 
         return $accessTokenSchema;
     }
+    
+    /**
+     * Получение AccessTokenSchema.
+     *
+     * @return null|AccessTokenSchema
+     */
+    public function getAccessTokenSchema(): ?AccessTokenSchema
+    {
+        return $this->accessTokenSchema;
+    }
 
     /**
      * Получение AccessTokenSchema.
@@ -168,4 +176,5 @@ abstract class AvitoBaseClient extends SdkClient
      * @throws Exception
      */
     abstract public function getAccessToken(): ?AccessTokenSchema;
+    
 }

@@ -12,6 +12,6 @@ namespace andy87\avito\client\prompts\job\applicationsWebhook;
  *
  * @package src/prompt/job/applicationsWebhook
  */
-class ApplicationsWebhookGetPrompt extends ApplicationsWebhookPrompt
+final class ApplicationsWebhookGetPrompt extends ApplicationsWebhookPrompt
 {
 }

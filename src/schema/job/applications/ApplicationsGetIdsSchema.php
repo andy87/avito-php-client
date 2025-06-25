@@ -3,6 +3,7 @@
 namespace andy87\avito\client\schema\job\applications;
 
 use andy87\avito\client\ext\AvitoSchema;
+use andy87\avito\client\schema\dto\Result;
 
 /**
  *  Получение идентификаторов откликов
@@ -18,6 +19,7 @@ final class ApplicationsGetIdsSchema extends AvitoSchema
 {
     protected const MAPPING = [
         'applies' => [Applies::class],
+        'result' => Result::class,
     ];
 
     /**

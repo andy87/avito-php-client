@@ -18,7 +18,7 @@ use andy87\sdk\client\helpers\Method;
  *
  * @package src/prompt/job/applicationsWebhook
  */
-class ApplicationsWebhookPutPrompt extends ApplicationsWebhookGetPrompt
+final class ApplicationsWebhookPutPrompt extends ApplicationsWebhookPrompt
 {
     public string $schema = ApplicationsWebhookPutSchema::class;
 

@@ -13,6 +13,8 @@ use andy87\avito\client\ext\AvitoSchema;
  */
 abstract class ApplicationsWebhookSchema extends AvitoSchema
 {
+    public const AUTH = [];
+
     public string $secret;
 
     public string $url;

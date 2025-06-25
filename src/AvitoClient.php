@@ -2,6 +2,11 @@
 
 namespace andy87\avito\client;
 
+use andy87\avito\client\ext\AvitoSchema;
+use andy87\sdk\client\base\components\Schema;
+use andy87\sdk\client\base\interfaces\RequestInterface;
+use andy87\sdk\client\core\transport\Request;
+use andy87\sdk\client\core\transport\Response;
 use Exception;
 use andy87\avito\client\ext\AvitoBaseClient;
 use andy87\avito\client\schema\auth\AccessTokenSchema;
@@ -37,6 +42,30 @@ class AvitoClient extends AvitoBaseClient
     }
 
     /**
+     * Расширение для обработки схемы ответа.
+     * Добавление данных `Response` в случае ошибки.
+     *
+     * @param RequestInterface $request
+     * @param Response $response
+     *
+     * @return null|AvitoSchema
+     *
+     * @throws Exception
+     */
+    protected function constructSchema( RequestInterface $request, Response $response ): null|AvitoSchema
+    {
+        /** @var AvitoSchema $schema */
+        $schema = parent::constructSchema( $request, $response );
+
+        if ( $schema->result && !$schema->result->status )
+        {
+            $schema->result->response = $response;
+        }
+
+        return $schema;
+    }
+
+    /**
      * Получение access token
      * Получения временного ключа для авторизации
      *
@@ -48,6 +77,6 @@ class AvitoClient extends AvitoBaseClient
     {
         $account = $this->config->getAccount();
 
-        return $this->operatorManager->authOperator->getAccessToken( $account );
+        return $this->operatorManager->authOperator->getAccessToken( $account->client_id, $account->client_secret );
     }
 }

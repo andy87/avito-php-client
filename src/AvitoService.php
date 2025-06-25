@@ -132,11 +132,9 @@ class AvitoService
      *
      * @throws Exception
      */
-    public function cacheSet( mixed $data ): ?bool
+    public function cacheSet( string $data ): ?bool
     {
         $account = $this->client->getConfig()->getAccount();
-
-        $data = serialize($data);
 
         return $this->getModule(ClientInterface::CACHE)?->setData( $account, $data );
     }

@@ -21,11 +21,11 @@ class AvitoAccount extends Account
     /**
      * Конструктор класса Account.
      *
-     * @param string $clientId Идентификатор клиента.
-     * @param string $clientSecret Секрет клиента.
+     * @param string $client_id Идентификатор клиента.
+     * @param string $client_secret Секрет клиента.
      */
     public function __construct(
-        public string $clientId,
-        public string $clientSecret
+        public string $client_id,
+        public string $client_secret
     ) { }
 }

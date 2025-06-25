@@ -3,6 +3,7 @@
 namespace andy87\avito\client\schema\job\vacancies\batch;
 
 use andy87\avito\client\ext\AvitoSchema;
+use andy87\avito\client\schema\dto\Result;
 
 /**
  * Просмотр данных вакансий
@@ -18,6 +19,7 @@ use andy87\avito\client\ext\AvitoSchema;
 final class VacanciesBatchSchema extends AvitoSchema
 {
     public const MAPPING = [
-        'items' => [Vacancy::class]
+        'items' => [Vacancy::class],
+        'result' => Result::class,
     ];
 }
