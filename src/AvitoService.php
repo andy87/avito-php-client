@@ -64,12 +64,12 @@ class AvitoService
     {
         $configClass = static::CLASS_CONFIG;
 
-        if ( !is_subclass_of( $configClass, AvitoClient::class ) ) {
-            throw new Exception( "Класс $configClass должен быть подклассом AvitoConfig" );
+        if ( is_subclass_of( $configClass, AvitoConfig::class ) )
+        {
+            return new $configClass( $avitoAccount );
         }
 
-        return new $configClass( $avitoAccount );
-
+        throw new Exception( "Класс $configClass должен быть подклассом AvitoConfig" );
     }
 
     /**
