@@ -20,8 +20,9 @@ final class AvitoAuthBearer implements AuthorizationInterface
      */
     public function run( AvitoClient|AbstractClient $client, Query $query ): void
     {
-        $bearerToken = $client->getBearerToken();
-
-        $query->addCustomHeaders([ 'Authorization' => "Bearer $bearerToken" ]);
+        if ( $token = $client->getBearerToken() )
+        {
+            $query->addCustomHeaders([ 'Authorization' => "Bearer $token" ]);
+        }
     }
 }
