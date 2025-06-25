@@ -35,11 +35,11 @@ final class JobOperator extends BaseAvitoOperator
      *
      * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsWebhookGet
      *
-     * @return null|ApplicationsWebhookGetSchema
+     * @return null|ApplicationsWebhookGetSchema|Warning
      *
      * @throws Exception
      */
-    public function applicationsWebhookGet(): ?ApplicationsWebhookGetSchema
+    public function applicationsWebhookGet(): null|ApplicationsWebhookGetSchema|Warning
     {
         $applicationsWebhookPrompt = new ApplicationsWebhookGetPrompt();
 
@@ -61,11 +61,11 @@ final class JobOperator extends BaseAvitoOperator
      * @param string $url
      * @param string $secret
      *
-     * @return null|ApplicationsWebhookPutSchema
+     * @return null|ApplicationsWebhookPutSchema|Warning
      *
      * @throws Exception
      */
-    public function applicationsWebhookPut( string $url, string $secret = ApplicationsWebhookPrompt::DEFAULT_SECRET ): ?ApplicationsWebhookPutSchema
+    public function applicationsWebhookPut( string $url, string $secret = ApplicationsWebhookPrompt::DEFAULT_SECRET ): null|ApplicationsWebhookPutSchema|Warning
     {
         $applicationsWebhookPutPrompt = new ApplicationsWebhookPutPrompt( $url, $secret );
 
@@ -83,11 +83,11 @@ final class JobOperator extends BaseAvitoOperator
      *
      * @param string $url
      *
-     * @return null|ApplicationsWebhookDeleteSchema
+     * @return null|ApplicationsWebhookDeleteSchema|Warning
      *
      * @throws Exception
      */
-    public function applicationsWebhookDelete( string $url ): ?ApplicationsWebhookDeleteSchema
+    public function applicationsWebhookDelete( string $url ): null|ApplicationsWebhookDeleteSchema|Warning
     {
         $applicationsWebhookDeletePrompt = new ApplicationsWebhookDeletePrompt();
         $applicationsWebhookDeletePrompt->url = $url;
@@ -113,11 +113,11 @@ final class JobOperator extends BaseAvitoOperator
      * @param null|string $params
      * @param bool $photos
      *
-     * @return null|ResumeGetItemSchema
+     * @return null|ResumeGetItemSchema|Warning
      *
      * @throws Exception
      */
-    public function resumeGetItem( int $resume_id, ?string $fields = null, ?string $params = null, bool $photos = false ): ?ResumeGetItemSchema
+    public function resumeGetItem( int $resume_id, ?string $fields = null, ?string $params = null, bool $photos = false ): null|ResumeGetItemSchema|Warning
     {
         $resumeGetItemPrompt = new ResumeGetItemPrompt( $resume_id, $fields, $params, $photos );
 
@@ -135,11 +135,11 @@ final class JobOperator extends BaseAvitoOperator
      *
      * @param int $resume_id Идентификатор резюме
      *
-     * @return null|ResumeGetContactsSchema
+     * @return null|ResumeGetContactsSchema|Warning
      *
      * @throws Exception
      */
-    public function resumeGetContacts( int $resume_id ): ?ResumeGetContactsSchema
+    public function resumeGetContacts( int $resume_id ): null|ResumeGetContactsSchema|Warning
     {
         $resumeGetContactsPrompt = new ResumeGetContactsPrompt( $resume_id );
 
@@ -157,11 +157,11 @@ final class JobOperator extends BaseAvitoOperator
      *
      * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsGetIds
      *
-     * @return null|ApplicationsGetIdsSchema
+     * @return null|ApplicationsGetIdsSchema|Warning
      *
      * @throws Exception
      */
-    public function applicationsGetIds(): ?ApplicationsGetIdsSchema
+    public function applicationsGetIds(): null|ApplicationsGetIdsSchema|Warning
     {
         $applicationsGetIdsPrompt = new ApplicationsGetIdsPrompt();
 
@@ -185,11 +185,11 @@ final class JobOperator extends BaseAvitoOperator
      * @param array $fields Поля для основного тела ответа
      * @param array $params Дополнительные поля, которые входят в params (можно указать несколько значений через запятую).
      *
-     * @return ?VacanciesBatchSchema
+     * @return null|VacanciesBatchSchema|Warning
      *
      * @throws Exception
      */
-    public function vacanciesBatch( array $ids, array $fields = [], array $params = []): ?VacanciesBatchSchema
+    public function vacanciesBatch( array $ids, array $fields = [], array $params = []): null|VacanciesBatchSchema|Warning
     {
         $vacanciesBatchPrompt = new VacanciesBatchPrompt( $ids, $fields, $params );
 

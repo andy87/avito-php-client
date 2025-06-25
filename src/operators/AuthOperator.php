@@ -26,11 +26,11 @@ final class AuthOperator extends BaseAvitoOperator
      * @param string $client_id
      * @param string $client_secret
      *
-     * @return null|AccessTokenSchema
+     * @return null|AccessTokenSchema|Warning
      *
      * @throws Exception
      */
-    public function getAccessToken( string $client_id, string $client_secret ): ?AccessTokenSchema
+    public function getAccessToken( string $client_id, string $client_secret ): null|AccessTokenSchema|Warning
     {
         $accessTokenPrompt = new AccessTokenPrompt( $client_id, $client_secret );
 
@@ -50,11 +50,11 @@ final class AuthOperator extends BaseAvitoOperator
      * @param string $client_secret
      * @param string $code
      *
-     * @return null|AccessTokenSchema
+     * @return null|AccessTokenSchema|Warning
      *
      * @throws Exception
      */
-    public function getAccessTokenAuthorizationCode(string $client_id, string $client_secret, string $code ): ?AccessTokenSchema
+    public function getAccessTokenAuthorizationCode(string $client_id, string $client_secret, string $code ): null|AccessTokenSchema|Warning
     {
         $accessTokenCodePrompt = new AccessTokenCodePrompt( $client_id, $client_secret, $code );
 
@@ -74,11 +74,11 @@ final class AuthOperator extends BaseAvitoOperator
      * @param string $client_secret
      * @param string $refresh_token
      *
-     * @return null|AccessTokenSchema
+     * @return null|AccessTokenSchema|Warning
      *
      * @throws Exception
      */
-    public function refreshAccessTokenAuthorizationCode( string $client_id, string $client_secret, string $refresh_token ): ?AccessTokenSchema
+    public function refreshAccessTokenAuthorizationCode( string $client_id, string $client_secret, string $refresh_token ): null|AccessTokenSchema|Warning
     {
         $accessTokenRefreshPrompt = new AccessTokenRefreshPrompt( $client_id, $client_secret, $refresh_token );
 
