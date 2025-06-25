@@ -23,7 +23,7 @@ final class ApplicationsWebhookPutPrompt extends ApplicationsWebhookPrompt
 {
     public string $schema = ApplicationsWebhookPutSchema::class;
 
-    protected string $method = Method::PUT;
+    protected string $method = MethodRegistry::PUT;
 
 
     /** @var string $url Webhook URL to filter by (optional). */
@@ -31,6 +31,8 @@ final class ApplicationsWebhookPutPrompt extends ApplicationsWebhookPrompt
 
     /** @var string $secret Webhook secret key to filter by (optional). */
     public string $secret;
+
+    protected ?string $contentType = ContentType::JSON;
 
 
 

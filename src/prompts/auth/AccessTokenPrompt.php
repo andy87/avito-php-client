@@ -18,11 +18,14 @@ use andy87\avito\client\schema\auth\AccessTokenSchema;
  */
 class AccessTokenPrompt extends AvitoPrompt
 {
+    public const APPLY_QUERY_TO_URL = true;
+
     protected string $schema = AccessTokenSchema::class;
+
     protected string $path = 'token';
 
-    protected string $method = Method::POST;
-    protected ?string $contentType = ContentType::X_WWW_FORM_URLENCODED;
+    protected string $method = MethodRegistry::POST;
+    protected ?string $contentType = ContentType::FORM_URLENCODED;
 
 
 

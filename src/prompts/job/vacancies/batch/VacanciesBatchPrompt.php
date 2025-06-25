@@ -33,7 +33,7 @@ final class VacanciesBatchPrompt extends AvitoPrompt
 
 
     /** @var string Метод запроса */
-    public string $method = Method::POST;
+    public string $method = MethodRegistry::POST;
 
     /** @var string Путь к API */
     public string $path = '/job/v2/vacancies/batch';

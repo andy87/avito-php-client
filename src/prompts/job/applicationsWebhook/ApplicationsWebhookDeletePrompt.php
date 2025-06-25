@@ -19,7 +19,7 @@ final class ApplicationsWebhookDeletePrompt extends ApplicationsWebhookPrompt
 {
     public string $schema = ApplicationsWebhookDeleteSchema::class;
 
-    protected string $method = Method::DELETE;
+    protected string $method = MethodRegistry::DELETE;
 
     public string $url;
 }

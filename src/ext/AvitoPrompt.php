@@ -19,7 +19,7 @@ abstract class AvitoPrompt extends Prompt
      *
      * @var string $method
      */
-    protected string $method = Method::GET;
+    protected string $method = MethodRegistry::GET;
 
     /**
      * Тип контента запроса.
@@ -27,4 +27,18 @@ abstract class AvitoPrompt extends Prompt
      * @var null|string $contentType
      */
     protected ?string $contentType = ContentType::JSON;
+
+    /**
+     * @param Response $response
+     *
+     * @return string
+     */
+    public function getSchema( Response $response ): string
+    {
+        if ( $response->getStatusCode() >= 400 ) {
+            return Warning::class;
+        }
+
+        return parent::getSchema( $response );
+    }
 }
