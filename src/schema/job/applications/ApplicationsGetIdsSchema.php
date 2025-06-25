@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\schema\job\applications;
 
-use andy87\sdk\client\base\components\Schema;
+use andy87\avito\client\ext\AvitoSchema;
 
 /**
  *  Получение идентификаторов откликов
@@ -14,7 +14,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @package src/schema/job/applications
  */
-final class ApplicationsGetIdsSchema extends Schema
+final class ApplicationsGetIdsSchema extends AvitoSchema
 {
     protected const MAPPING = [
         'applies' => [Applies::class],

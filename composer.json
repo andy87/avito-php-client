@@ -24,7 +24,8 @@
 
   "require": {
     "php": ">=8.0",
-    "andy87/sdk-php-client": "dev-main"
+    "andy87/sdk-php-client": "dev-main",
+    "ext-curl": "*"
   },
 
   "autoload": {

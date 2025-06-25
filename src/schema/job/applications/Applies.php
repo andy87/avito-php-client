@@ -2,6 +2,8 @@
 
 namespace andy87\avito\client\schema\job\applications;
 
+use andy87\sdk\client\base\components\Schema;
+
 /**
  * Отклик
  *
@@ -9,7 +11,7 @@ namespace andy87\avito\client\schema\job\applications;
  *
  * @package src/schema/job/applications
  */
-final class Applies
+final class Applies extends Schema
 {
     /** @var null|string Дата создания */
     public ?string $created_at = null;

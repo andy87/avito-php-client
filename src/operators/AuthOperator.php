@@ -25,16 +25,16 @@ final class AuthOperator extends BaseAvitoOperator
      *
      * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessToken
      *
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param string $client_id
+     * @param string $client_secret
      *
      * @return null|AccessTokenSchema
      *
      * @throws Exception
      */
-    public function getAccessToken( string $clientId, string $clientSecret ): ?AccessTokenSchema
+    public function getAccessToken( string $client_id, string $client_secret ): ?AccessTokenSchema
     {
-        $accessTokenPrompt = new AccessTokenPrompt( $clientId, $clientSecret );
+        $accessTokenPrompt = new AccessTokenPrompt( $client_id, $client_secret );
 
         /** @var null|AccessTokenSchema $accessTokenSchema */
         $accessTokenSchema = $this->client->send( $accessTokenPrompt );
@@ -48,17 +48,17 @@ final class AuthOperator extends BaseAvitoOperator
      *
      * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/getAccessTokenAuthorizationCode
      *
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param string $client_id
+     * @param string $client_secret
      * @param string $code
      *
      * @return null|AccessTokenSchema
      *
      * @throws Exception
      */
-    public function getAccessTokenAuthorizationCode( string $clientId, string $clientSecret, string $code ): ?AccessTokenSchema
+    public function getAccessTokenAuthorizationCode(string $client_id, string $client_secret, string $code ): ?AccessTokenSchema
     {
-        $accessTokenCodePrompt = new AccessTokenCodePrompt( $clientId, $clientSecret, $code );
+        $accessTokenCodePrompt = new AccessTokenCodePrompt( $client_id, $client_secret, $code );
 
         /** @var null|AccessTokenSchema $accessTokenSchema */
         $accessTokenSchema = $this->client->send( $accessTokenCodePrompt );
@@ -72,17 +72,17 @@ final class AuthOperator extends BaseAvitoOperator
      *
      * @documentation https://developers.avito.ru/api-catalog/auth/documentation#operation/refreshAccessTokenAuthorizationCode
      *
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param string $client_id
+     * @param string $client_secret
      * @param string $refresh_token
      *
      * @return null|AccessTokenSchema
      *
      * @throws Exception
      */
-    public function refreshAccessTokenAuthorizationCode( string $clientId, string $clientSecret, string $refresh_token ): ?AccessTokenSchema
+    public function refreshAccessTokenAuthorizationCode( string $client_id, string $client_secret, string $refresh_token ): ?AccessTokenSchema
     {
-        $accessTokenRefreshPrompt = new AccessTokenRefreshPrompt( $clientId, $clientSecret, $refresh_token );
+        $accessTokenRefreshPrompt = new AccessTokenRefreshPrompt( $client_id, $client_secret, $refresh_token );
 
         /** @var null|AccessTokenSchema $accessTokenSchema */
         $accessTokenSchema = $this->client->send( $accessTokenRefreshPrompt );

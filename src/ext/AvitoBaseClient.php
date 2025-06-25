@@ -128,8 +128,8 @@ abstract class AvitoBaseClient extends SdkClient
                     {
                         $this->errorHandler([
                             'message' => 'Authorization failed. Please check your client ID and secret.',
-                            'client_id' => $account->clientId,
-                            'client_secret' => $account->clientSecret,
+                            'client_id' => $account->client_id,
+                            'client_secret' => $account->client_secret,
                         ]);
                     }
                 }

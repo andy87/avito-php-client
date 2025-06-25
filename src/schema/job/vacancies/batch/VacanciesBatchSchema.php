@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\schema\job\vacancies\batch;
 
-use andy87\sdk\client\base\components\Schema;
+use andy87\avito\client\ext\AvitoSchema;
 
 /**
  * Просмотр данных вакансий
@@ -15,7 +15,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @package src/schema/job/vacancies/batch
  */
-final class VacanciesBatchSchema extends Schema
+final class VacanciesBatchSchema extends AvitoSchema
 {
     public const MAPPING = [
         'items' => [Vacancy::class]

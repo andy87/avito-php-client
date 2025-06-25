@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\schema\job\resumes;
 
-use andy87\sdk\client\base\components\Schema;
+use andy87\avito\client\ext\AvitoSchema;
 use andy87\avito\client\schema\job\resumes\contacts\Contact;
 
 /**
@@ -13,7 +13,7 @@ use andy87\avito\client\schema\job\resumes\contacts\Contact;
  *
  * @package src/schema/job/resumes
  */
-final class ResumeGetContactsSchema extends Schema
+final class ResumeGetContactsSchema extends AvitoSchema
 {
     /** @var array */
     protected const MAPPING = [

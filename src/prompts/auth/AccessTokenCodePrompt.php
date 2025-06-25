@@ -18,19 +18,19 @@ class AccessTokenCodePrompt extends AccessTokenPrompt
 {
     public string $code;
 
-    public string $grantType = GrantType::AUTHORIZATION_CODE;
+    public string $grant_type = GrantType::AUTHORIZATION_CODE;
 
 
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param string $client_id
+     * @param string $client_secret
      * @param string $code
      */
-    public function __construct( string $clientId, string $clientSecret, string $code )
+    public function __construct(string $client_id, string $client_secret, string $code )
     {
         $this->code = $code;
 
-        parent::__construct( $clientId, $clientSecret );
+        parent::__construct( $client_id, $client_secret );
     }
 }

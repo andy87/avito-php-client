@@ -29,36 +29,36 @@ class AccessTokenPrompt extends AvitoPrompt
 
 
     /**
-     * @var string $clientId Avito API Client ID.
+     * @var string $client_id Avito API Client ID.
      */
-    public string $clientId;
+    public string $client_id;
 
     /**
-     * @var string $clientSecret Avito API Client Secret.
+     * @var string $client_secret Avito API Client Secret.
      */
-    public string $clientSecret;
+    public string $client_secret;
 
     /**
      * Тип OAuth flow. Строка refresh_token
      *
-     * @var string $grantType OAuth grant type (e.g. "client_credentials").
+     * @var string $grant_type OAuth grant type (e.g. "client_credentials").
      *
      * Default: "refresh_token"
      */
-    public string $grantType = GrantType::CLIENT_CREDENTIALS;
+    public string $grant_type = GrantType::CLIENT_CREDENTIALS;
 
 
 
     /**
      * Конструктор для создания запроса на получение токена доступа.
      *
-     * @param string $clientId Avito API Client ID.
-     * @param string $clientSecret Avito API Client Secret.
+     * @param string $client_id Avito API Client ID.
+     * @param string $client_secret Avito API Client Secret.
      */
-    public function __construct( string $clientId, string $clientSecret )
+    public function __construct( string $client_id, string $client_secret )
     {
-        $this->clientId = $clientId;
+        $this->client_id = $client_id;
 
-        $this->clientSecret = $clientSecret;
+        $this->client_secret = $client_secret;
     }
 }

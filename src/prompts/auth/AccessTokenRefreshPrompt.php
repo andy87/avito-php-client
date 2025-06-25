@@ -16,19 +16,19 @@ class AccessTokenRefreshPrompt extends AccessTokenPrompt
 {
     public string $refresh_token;
 
-    public string $grantType = GrantType::REFRESH_TOKEN;
+    public string $grant_type = GrantType::REFRESH_TOKEN;
 
 
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param string $client_id
+     * @param string $client_secret
      * @param string $refresh_token
      */
-    public function __construct( string $clientId, string $clientSecret, string $refresh_token )
+    public function __construct(string $client_id, string $client_secret, string $refresh_token )
     {
         $this->refresh_token = $refresh_token;
 
-        parent::__construct( $clientId, $clientSecret );
+        parent::__construct( $client_id, $client_secret );
     }
 }

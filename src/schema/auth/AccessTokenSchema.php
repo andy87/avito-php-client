@@ -2,8 +2,8 @@
 
 namespace andy87\avito\client\schema\auth;
 
+use andy87\avito\client\ext\AvitoSchema;
 use andy87\sdk\client\base\components\Prompt;
-use andy87\sdk\client\base\components\Schema;
 
 /**
  * Схема ожидаемого ответа от API.
@@ -15,7 +15,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @package src/schema/auth
  */
-final class AccessTokenSchema extends Schema
+final class AccessTokenSchema extends AvitoSchema
 {
     /**
      * @var string $access_token
@@ -60,6 +60,6 @@ final class AccessTokenSchema extends Schema
      */
     public function validate( Prompt $prompt ): bool
     {
-        return !empty($this->access_token);
+        return parent::validate($prompt) && !empty($this->access_token);
     }
 }
