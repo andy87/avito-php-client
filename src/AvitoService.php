@@ -116,11 +116,11 @@ class AvitoService
      *
      * @param string $moduleName
      *
-     * @return AbstractLogger|AbstractCache|AbstractTest|AbstractTransport
+     * @return null|AbstractLogger|AbstractCache|AbstractTest|AbstractTransport
      *
      * @throws Exception
      */
-    protected function getModule( string $moduleName ): AbstractLogger|AbstractCache|AbstractTest|AbstractTransport
+    protected function getModule( string $moduleName ): null|AbstractLogger|AbstractCache|AbstractTest|AbstractTransport
     {
         return $this->client->getModule( $moduleName );
     }
