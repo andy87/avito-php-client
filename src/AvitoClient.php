@@ -12,6 +12,8 @@ use andy87\avito\client\schema\auth\AccessTokenSchema;
  * Этот клиент предоставляет доступ к различным операторам,
  * которые позволяют взаимодействовать с API Авито.
  *
+ * @method AvitoConfig getConfig()
+ *
  * @package src
  */
 class AvitoClient extends AvitoBaseClient

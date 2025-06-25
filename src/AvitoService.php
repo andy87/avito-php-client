@@ -134,7 +134,7 @@ class AvitoService
      */
     public function cacheSet( mixed $data ): ?bool
     {
-        $account = $this->client->config->getAccount();
+        $account = $this->client->getConfig()->getAccount();
 
         return $this->getModule(ClientInterface::CACHE)?->setData( $account, $data );
     }
@@ -146,7 +146,7 @@ class AvitoService
      */
     public function cacheGet(): mixed
     {
-        $account = $this->client->config->getAccount();
+        $account = $this->client->getConfig()->getAccount();
 
         return  $this->getModule(ClientInterface::CACHE)?->getData( $account );
     }
