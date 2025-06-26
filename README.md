@@ -108,5 +108,5 @@ $applicationsWebhookPutSchema = $myAvitoService->applicationsWebhookPut('url', '
 - `responses/` — реальные JSON-ответы API
 
 ## Изображение схемы классов
-![Class Diagram](https://raw.githubusercontent.com/andy87/avito-php-client/main/docs/class_diagram.png)
+![Class Diagram](https://github.com/andy87/avito-php-client/blob/main/AvitoPhpClient.png?raw=true)
 
