@@ -2,7 +2,7 @@
 
 namespace andy87\avito\client\schema\job\applications;
 
-use andy87\avito\client\schema\dto\Value;
+use andy87\avito\client\schema\dto\Matching;
 use andy87\sdk\client\base\components\Schema;
 
 /**
@@ -104,12 +104,12 @@ use andy87\sdk\client\base\components\Schema;
 class EnrichedProperties extends Schema
 {
     public const MAPPING = [
-        'age' => Value::class,
-        'citizenship' => Value::class,
-        'experience' => Value::class,
-        'full_name' => Value::class,
-        'gender' => Value::class,
-        'phone' => Value::class,
+        'age' => Matching::class,
+        'citizenship' => Matching::class,
+        'experience' => Matching::class,
+        'full_name' => Matching::class,
+        'gender' => Matching::class,
+        'phone' => Matching::class,
     ];
 
     public const EXPERIENCE_NO = '0';
@@ -143,23 +143,23 @@ class EnrichedProperties extends Schema
 
 
 
-    /** @var Value $age Возраст. Пусто, если соискатель не оставил эти данные */
-    public Value $age;
+    /** @var Matching $age Возраст. Пусто, если соискатель не оставил эти данные */
+    public Matching $age;
 
-    /** @var Value $citizenship Код страны в стандартной кодировке ISO 3166-1 alpha-3. Пусто, если соискатель не оставил эти данные. */
-    public Value $citizenship;
+    /** @var Matching $citizenship Код страны в стандартной кодировке ISO 3166-1 alpha-3. Пусто, если соискатель не оставил эти данные. */
+    public Matching $citizenship;
 
-    /** @var Value $experience Опыт по профессии. Пусто, если соискатель не оставил эти данные. */
-    public Value $experience;
+    /** @var Matching $experience Опыт по профессии. Пусто, если соискатель не оставил эти данные. */
+    public Matching $experience;
 
-    /** @var Value $full_name ФИО. Строка со свободным вводом кандидата. Пусто, если соискатель не оставил эти данные. */
-    public Value $full_name;
+    /** @var Matching $full_name ФИО. Строка со свободным вводом кандидата. Пусто, если соискатель не оставил эти данные. */
+    public Matching $full_name;
 
-    /** @var Value $gender Пол. Пусто, если соискатель не оставил эти данные. */
-    public Value $gender;
+    /** @var Matching $gender Пол. Пусто, если соискатель не оставил эти данные. */
+    public Matching $gender;
 
-    /** @var Value $phone Номер телефона в формате +79211234455. Пусто, если соискатель не оставил эти данные. */
-    public Value $phone;
+    /** @var Matching $phone Номер телефона в формате +79211234455. Пусто, если соискатель не оставил эти данные. */
+    public Matching $phone;
 
     /**
      * @var string $status Текущий статус опроса

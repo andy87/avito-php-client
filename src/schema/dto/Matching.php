@@ -5,11 +5,11 @@ namespace andy87\avito\client\schema\dto;
 use andy87\sdk\client\base\components\Schema;
 
 /**
- * Класс Value
+ * Класс Matching
  *
  * Представляет собой структуру данных, содержащую статус соответствия и значение.
  */
-class Value extends Schema
+class Matching extends Schema
 {
     /** @var string подошел под критерии */
     public const STATUS_MATCHED = 'matched';
