@@ -98,8 +98,6 @@ final class JobOperator extends BaseAvitoOperator
         return $response;
     }
 
-    //resumeGetItem
-
     /**
      * Просмотр данных резюме
      *
@@ -161,9 +159,9 @@ final class JobOperator extends BaseAvitoOperator
      *
      * @throws Exception
      */
-    public function applicationsGetIds(): null|ApplicationsGetIdsSchema|Warning
+    public function applicationsGetIds( ?string $updatedAtFrom = null, ?string $cursor = null, ?string $vacancyIds = null, ?string $is_viewed = null ): null|ApplicationsGetIdsSchema|Warning
     {
-        $applicationsGetIdsPrompt = new ApplicationsGetIdsPrompt();
+        $applicationsGetIdsPrompt = new ApplicationsGetIdsPrompt( $updatedAtFrom, $cursor, $vacancyIds, $is_viewed );
 
         /** @var null|ApplicationsGetIdsSchema $applicationsGetIdsSchema */
         $applicationsGetIdsSchema = $this->client->send( $applicationsGetIdsPrompt );
