@@ -3,7 +3,7 @@
 
   "description": "Клиент для отправки HTTP запросов к API Avito.ru.",
 
-  "keywords": ["and_y87", "php", "client", "avito", "rest", "api", "avito.ru", "avito.ru/api"],
+  "keywords": ["and_y87", "php", "client", "avito", "rest", "api", "avito.ru"],
 
   "homepage": "https://github.com/andy87/avito-php-client",
 
