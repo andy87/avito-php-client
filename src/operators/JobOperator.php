@@ -2,25 +2,16 @@
 
 namespace andy87\avito\client\operators;
 
-use andy87\avito\client\prompts\job\applications\ApplicationsGetByIdsPrompt;
-use andy87\avito\client\schema\dto\Warning;
-use andy87\avito\client\schema\job\applications\ApplicationsGetByIdsSchema;
 use Exception;
-use andy87\avito\client\prompts\job\resume\ResumeGetItemPrompt;
-use andy87\avito\client\prompts\job\resume\ResumeGetContactsPrompt;
 use andy87\avito\client\prompts\job\vacancies\batch\VacanciesBatchPrompt;
-use andy87\avito\client\prompts\job\applications\ApplicationsGetIdsPrompt;
-use andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookPrompt;
-use andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookPutPrompt;
-use andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookGetPrompt;
-use andy87\avito\client\prompts\job\applicationsWebhook\ApplicationsWebhookDeletePrompt;
-use andy87\avito\client\schema\job\resumes\ResumeGetItemSchema;
-use andy87\avito\client\schema\job\resumes\ResumeGetContactsSchema;
+use andy87\avito\client\prompts\job\resume\{ ResumeGetItemPrompt, ResumeGetContactsPrompt };
+use andy87\avito\client\prompts\job\applications\{ ApplicationsGetIdsPrompt, ApplicationsGetByIdsPrompt};
+use andy87\avito\client\prompts\job\applicationsWebhook\{ ApplicationsWebhookPrompt, ApplicationsWebhookPutPrompt, ApplicationsWebhookGetPrompt, ApplicationsWebhookDeletePrompt };
+use andy87\avito\client\schema\dto\Warning;
 use andy87\avito\client\schema\job\vacancies\batch\VacanciesBatchSchema;
-use andy87\avito\client\schema\job\applications\ApplicationsGetIdsSchema;
-use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookGetSchema;
-use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookPutSchema;
-use andy87\avito\client\schema\job\applicationsWebhook\ApplicationsWebhookDeleteSchema;
+use andy87\avito\client\schema\job\resumes\{ ResumeGetItemSchema, ResumeGetContactsSchema };
+use andy87\avito\client\schema\job\applications\{ ApplicationsGetIdsSchema, ApplicationsGetByIdsSchema };
+use andy87\avito\client\schema\job\applicationsWebhook\{ ApplicationsWebhookGetSchema, ApplicationsWebhookPutSchema, ApplicationsWebhookDeleteSchema };
 
 /**
  * Авито.Работа
