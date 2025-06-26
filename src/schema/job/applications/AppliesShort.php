@@ -11,7 +11,7 @@ use andy87\sdk\client\base\components\Schema;
  *
  * @package src/schema/job/applications
  */
-final class Applies extends Schema
+class AppliesShort extends Schema
 {
     /** @var null|string Дата создания */
     public ?string $created_at = null;

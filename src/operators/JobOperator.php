@@ -2,7 +2,9 @@
 
 namespace andy87\avito\client\operators;
 
+use andy87\avito\client\prompts\job\applications\ApplicationsGetByIdsPrompt;
 use andy87\avito\client\schema\dto\Warning;
+use andy87\avito\client\schema\job\applications\ApplicationsGetByIdsSchema;
 use Exception;
 use andy87\avito\client\prompts\job\resume\ResumeGetItemPrompt;
 use andy87\avito\client\prompts\job\resume\ResumeGetContactsPrompt;
@@ -167,6 +169,29 @@ final class JobOperator extends BaseAvitoOperator
         $applicationsGetIdsSchema = $this->client->send( $applicationsGetIdsPrompt );
 
         return $applicationsGetIdsSchema;
+    }
+
+    /**
+     * Получение идентификаторов откликов
+     * Возвращает лимитированное количество идентификаторов откликов отсортированных по дате создания начиная с самых свежих,
+     * для последующего получения по ним расширенной информации через метод получение списка откликов.
+     * Максимальный лимит = 100
+     *
+     * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsGetByIds
+     *
+     * @return null|ApplicationsGetIdsSchema|Warning
+     *
+     * @throws Exception
+     */
+    public function applicationsGetByIds( array $ids ): null|ApplicationsGetIdsSchema|Warning
+    {
+        $applicationsGetByIdsPrompt = new ApplicationsGetByIdsPrompt();
+        $applicationsGetByIdsPrompt->ids = $ids;
+
+        /** @var null|ApplicationsGetByIdsSchema $applicationsGetByIdsPromptSchema */
+        $applicationsGetByIdsPromptSchema = $this->client->send( $applicationsGetByIdsPrompt );
+
+        return $applicationsGetByIdsPromptSchema;
     }
 
     /**

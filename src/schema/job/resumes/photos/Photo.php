@@ -2,13 +2,12 @@
 
 namespace andy87\avito\client\schema\job\resumes\photos;
 
-use andy87\sdk\client\base\components\Schema;
+use andy87\avito\client\schema\dto\Resource;
 
 /**
  * Фото в резюме
  */
-class Photo extends Schema
+class Photo extends Resource
 {
-    /** @var null|string URL фото */
-    public ?string $url = null;
+
 }

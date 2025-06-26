@@ -21,5 +21,8 @@ final class ApplicationsWebhookDeletePrompt extends ApplicationsWebhookPrompt
 
     protected string $method = MethodRegistry::DELETE;
 
+    public ?string $contentType = null;
+
     public string $url;
+
 }

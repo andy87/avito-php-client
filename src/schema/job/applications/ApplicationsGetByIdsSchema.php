@@ -6,27 +6,24 @@ use andy87\avito\client\ext\AvitoSchema;
 use andy87\avito\client\schema\dto\Result;
 
 /**
- *  Получение идентификаторов откликов
- *
+ * Получение идентификаторов откликов
  * Возвращает лимитированное количество идентификаторов откликов отсортированных по дате создания начиная с самых свежих,
  * для последующего получения по ним расширенной информации через метод получение списка откликов.
+ * Максимальный лимит = 100
  *
- * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsGetIds
+ * @documentation https://developers.avito.ru/api-catalog/job/documentation#operation/applicationsGetByIds
  *
  * @package src/schema/job/applications
  */
-final class ApplicationsGetIdsSchema extends AvitoSchema
+class ApplicationsGetByIdsSchema extends AvitoSchema
 {
-    protected const MAPPING = [
-        'applies' => [AppliesShort::class],
+    public const MAPPING = [
+        'applies' => [AppliesFull::class],
         'result' => Result::class,
     ];
 
     /**
-     * лимитированное количество идентификаторов откликов отсортированных по дате создания начиная с самых свежих
-     *
-     * @var array
+     * @var array|AppliesFull[]
      */
     public array $applies = [];
-
 }
